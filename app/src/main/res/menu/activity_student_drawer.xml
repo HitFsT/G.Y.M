@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_studentreservation"
+            android:icon="@drawable/ic_studentreservation"
+            android:title="我的预约" />
+        <item
+            android:id="@+id/nav_studentgame"
+            android:icon="@drawable/ic_studentgame"
+            android:title="我的比赛" />
+        <item
+            android:id="@+id/nav_studentplan"
+            android:icon="@drawable/ic_studentplan"
+            android:title="我的健身计划" />
+        <item
+            android:id="@+id/nav_studentlogout"
+            android:icon="@drawable/ic_studentlogout"
+            android:title="退出登录" />
+    </group>
+
+</menu>
