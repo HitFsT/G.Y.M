@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -94,7 +95,18 @@ public class StudentActivity extends AppCompatActivity
         } else if (id == R.id.nav_student_plan) {
             Intent intent = new Intent(this, StudentPlanActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_student_logout) {
+        } else if (id == R.id.nav_contact_us) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
+            dialog.setTitle("联系我们");
+            dialog.setMessage("邮箱:396433458@qq.com\n电话:XXXXXXXXX");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("OK", new DialogInterface.
+                    OnClickListener() {
+                public void onClick(DialogInterface dialog, int which)  {
+                }
+            });
+            dialog.show();
+        }else if (id == R.id.nav_student_logout) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
             dialog.setTitle("退出登录");
             dialog.setMessage("确定退出登录吗?");
@@ -109,17 +121,36 @@ public class StudentActivity extends AppCompatActivity
             dialog.setNegativeButton("Cancel", new DialogInterface.
                     OnClickListener() {
                         public void onClick(DialogInterface dialog, int which)  {
-                            Intent intent = new Intent(StudentActivity.this, StudentActivity.class);
-                            startActivity(intent);
                         }
             });
             dialog.show();
-
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
+            AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
+            dialog.setTitle("退出登录");
+            dialog.setMessage("确定退出登录吗?");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("OK", new DialogInterface.
+                    OnClickListener() {
+                public void onClick(DialogInterface dialog, int which)  {
+                    Intent intent = new Intent(StudentActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            });
+            dialog.setNegativeButton("Cancel", new DialogInterface.
+                    OnClickListener() {
+                public void onClick(DialogInterface dialog, int which)  {
+                }
+            });
+            dialog.show();
+        }
+        return false;
+    }
+
 }
