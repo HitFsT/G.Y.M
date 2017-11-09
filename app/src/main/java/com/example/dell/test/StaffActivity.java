@@ -16,14 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class StudentActivity extends AppCompatActivity
+public class StaffActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        setContentView(R.layout.activity_staff);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_staff);
         navigationView.setItemIconTintList(null);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,19 +37,19 @@ public class StudentActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_staff);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView1 = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView1 = (NavigationView) findViewById(R.id.nav_view_staff);
         navigationView1.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_staff);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -85,40 +85,34 @@ public class StudentActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_student_reservation) {
-            Intent intent = new Intent(this, StudentReservationActivity.class);
+        if (id == R.id.nav_mygym) {
+            Intent intent = new Intent(this, MygymActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_student_game) {
-            Intent intent = new Intent(this, StudentTimeActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_student_plan) {
-            Intent intent = new Intent(this, StudentPlanActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_student_logout) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
+        } else if (id == R.id.nav_staff_logout) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(StaffActivity.this);
             dialog.setTitle("退出登录");
             dialog.setMessage("确定退出登录吗?");
             dialog.setCancelable(false);
             dialog.setPositiveButton("OK", new DialogInterface.
                     OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which)  {
-                            Intent intent = new Intent(StudentActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            }
+                public void onClick(DialogInterface dialog, int which)  {
+                    Intent intent = new Intent(StaffActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             });
             dialog.setNegativeButton("Cancel", new DialogInterface.
                     OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which)  {
-                            Intent intent = new Intent(StudentActivity.this, StudentActivity.class);
-                            startActivity(intent);
-                        }
+                public void onClick(DialogInterface dialog, int which)  {
+                    Intent intent = new Intent(StaffActivity.this, StaffActivity.class);
+                    startActivity(intent);
+                }
             });
             dialog.show();
 
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_staff);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

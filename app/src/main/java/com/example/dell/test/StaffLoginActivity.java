@@ -6,23 +6,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class StudentLoginActivity extends AppCompatActivity {
+public class StaffLoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_login);
-        TextView textview = findViewById(R.id.textView_student_register);
+        setContentView(R.layout.activity_staff_login);
+        TextView textview = findViewById(R.id.textView_staff_register);
         textview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(StudentLoginActivity.this, StudentRegisterActivity.class);
+                Intent intent = new Intent(StaffLoginActivity.this, StaffRegisterActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 
-    public void StudentLogin(View view) {
-        Intent intent = new Intent(this, StudentActivity.class);
+    public void StaffLogin(View view) {
+        Intent intent = new Intent(this, StaffActivity.class);
         startActivity(intent);
     }
+
+
 }

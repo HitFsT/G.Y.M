@@ -6,19 +6,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_studentreservation"
+            android:id="@+id/nav_student_reservation"
             android:icon="@drawable/ic_studentreservation"
             android:title="我的预约" />
         <item
-            android:id="@+id/nav_studentgame"
+            android:id="@+id/nav_student_game"
             android:icon="@drawable/ic_studentgame"
             android:title="我的比赛" />
         <item
-            android:id="@+id/nav_studentplan"
+            android:id="@+id/nav_student_plan"
             android:icon="@drawable/ic_studentplan"
             android:title="我的健身计划" />
         <item
-            android:id="@+id/nav_studentlogout"
+            android:id="@+id/nav_student_logout"
             android:icon="@drawable/ic_studentlogout"
             android:title="退出登录" />
     </group>

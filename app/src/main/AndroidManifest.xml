@@ -31,6 +31,11 @@
         <activity android:name=".StudentReservationActivity" />
         <activity android:name=".StudentTimeActivity" />
         <activity android:name=".StudentPlanActivity" />
+        <activity android:name=".StaffLoginActivity" />
+        <activity android:name=".StaffRegisterActivity" />
+        <activity android:name=".StudentRegisterActivity" />
+        <activity android:name=".StaffActivity" />
+        <activity android:name=".MygymActivity"></activity>
     </application>
 
 </manifest>
