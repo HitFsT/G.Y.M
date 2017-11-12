@@ -3,6 +3,7 @@ package com.example.dell.test;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +24,8 @@ public class StudentActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_student);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
@@ -95,7 +98,7 @@ public class StudentActivity extends AppCompatActivity
         } else if (id == R.id.nav_student_plan) {
             Intent intent = new Intent(this, StudentPlanActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_contact_us) {
+        }/* else if (id == R.id.nav_contact_us) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
             dialog.setTitle("联系我们");
             dialog.setMessage("邮箱:396433458@qq.com\n电话:XXXXXXXXX");
@@ -106,7 +109,8 @@ public class StudentActivity extends AppCompatActivity
                 }
             });
             dialog.show();
-        }else if (id == R.id.nav_student_logout) {
+
+        }*/else if (id == R.id.nav_student_logout) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
             dialog.setTitle("退出登录");
             dialog.setMessage("确定退出登录吗?");
