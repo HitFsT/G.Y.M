@@ -17,6 +17,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class StudentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +56,27 @@ public class StudentActivity extends AppCompatActivity
 
         NavigationView navigationView1 = (NavigationView) findViewById(R.id.nav_view);
         navigationView1.setNavigationItemSelectedListener(this);
+
+        /* Set the TextView text */
+        TextView gym_name_1 = (TextView) findViewById(R.id.textView_gym_id_3);
+        TextView gym_address_1 = (TextView) findViewById(R.id.textView_gym_address_3);
+        TextView gym_name_2 = (TextView) findViewById(R.id.textView_gym_id_4);
+        TextView gym_address_2 = (TextView) findViewById(R.id.textView_gym_address_4);
+        try {
+            JSONArray gym_list = getGymlist();
+            gym_name_1.setText(gym_list.getJSONObject(0).getString("gym_name"));
+            gym_address_1.setText(gym_list.getJSONObject(0).getString("gym_address"));
+            gym_name_2.setText(gym_list.getJSONObject(1).getString("gym_name"));
+            gym_address_2.setText(gym_list.getJSONObject(1).getString("gym_address"));
+        }catch(Exception e){
+            DialogUtil.showDialog(this, e.getMessage());
+        }
+
+    }
+
+    private JSONArray getGymlist() throws Exception{
+        String url = HttpUtil.BASE_URL + "GymList";
+        return new JSONArray(HttpUtil.getRequest(url));
     }
 
     @Override

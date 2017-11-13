@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -48,6 +49,7 @@ public class StudentLoginActivity extends AppCompatActivity {
             etPass.setText("");
         }
     }
+
 
     /* It checks the information in the database, back in the
     servlet, i set the user_id default to be -1, and the user_id
@@ -92,7 +94,7 @@ public class StudentLoginActivity extends AppCompatActivity {
         Map<String, String> map = new HashMap<>();
         map.put("user", username);
         map.put("pass", pwd);
-        String url = "http://69.171.68.142:8080/GYM/LoginServlet";
+        String url = HttpUtil.BASE_URL + "LoginServlet";
         return new JSONObject(HttpUtil.postRequest(url, map));
     }
 
