@@ -3,11 +3,11 @@ package com.example.dell.test;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MygymActivity extends AppCompatActivity {
+public class StaffEquipmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mygym);
+        setContentView(R.layout.activity_staff_equipment);
     }
 }

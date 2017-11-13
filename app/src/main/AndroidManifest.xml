@@ -35,8 +35,14 @@
         <activity android:name=".StaffLoginActivity" />
         <activity android:name=".StaffRegisterActivity" />
         <activity android:name=".StudentRegisterActivity" />
-        <activity android:name=".StaffActivity" />
-        <activity android:name=".MygymActivity"></activity>
+        <activity
+            android:name=".StaffActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".GymStaffActivity" />
+        <activity android:name=".EditActivity" />
+        <activity android:name=".StaffEquipmentActivity" />
+        <activity android:name=".StaffGameActivity" />
+        <activity android:name=".GymCreateActivity"></activity>
     </application>
 
 </manifest>

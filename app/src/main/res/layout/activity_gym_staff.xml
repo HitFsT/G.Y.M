@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dell.test.GymStaffActivity">
+
+    <ImageView
+        android:id="@+id/imageView_gym"
+        android:layout_width="287dp"
+        android:layout_height="122dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_mygym" />
+
+    <TextView
+        android:id="@+id/textView_gym_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="哈尔滨工业大学体育馆"
+        android:textSize="25dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_gym" />
+
+    <TextView
+        android:id="@+id/textView_gym_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="地址：圆通快递菜鸟驿站对面"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_gym_id" />
+
+
+    <TextView
+        android:id="@+id/textView_gym_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="电话：15545008273 联系人：李哥"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_gym_address" />
+
+    <Button
+        android:id="@+id/button_card_edit"
+        android:layout_width="83dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:onClick="Edit"
+        android:text="编辑信息"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_gym_phone" />
+
+    <Button
+        android:id="@+id/button_card_staff_equipment"
+        android:layout_width="83dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:onClick="StaffEquipment"
+        android:text="我的设施"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_card_edit" />
+
+    <Button
+        android:id="@+id/button_card_staff_game"
+        android:layout_width="83dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:onClick="StaffGame"
+        android:text="我的比赛"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_card_staff_equipment" />
+</android.support.constraint.ConstraintLayout>

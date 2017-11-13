@@ -16,7 +16,11 @@
         <item
             android:id="@+id/nav_student_plan"
             android:icon="@drawable/ic_studentplan"
-            android:title="我的健身计划" />
+            android:title="健身计划" />
+        <item
+            android:id="@+id/nav_contact_us"
+            android:icon="@drawable/ic_mail"
+            android:title="联系我们" />
         <item
             android:id="@+id/nav_student_logout"
             android:icon="@drawable/ic_studentlogout"
