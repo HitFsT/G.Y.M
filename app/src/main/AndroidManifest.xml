@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dell.test">
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -37,12 +38,17 @@
         <activity android:name=".StudentRegisterActivity" />
         <activity
             android:name=".StaffActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".GymStaffActivity" />
         <activity android:name=".EditActivity" />
         <activity android:name=".StaffEquipmentActivity" />
         <activity android:name=".StaffGameActivity" />
-        <activity android:name=".GymCreateActivity"></activity>
+        <activity android:name=".GymCreateActivity" />
+        <activity android:name=".GymStudentActivity" />
+        <activity android:name=".ReserveEquipmentActivity" />
+        <activity android:name=".InqueryGameActivity" />
+        <activity android:name=".AddEquipmentActivity" />
+        <activity android:name=".AddGameActivity"></activity>
     </application>
 
 </manifest>

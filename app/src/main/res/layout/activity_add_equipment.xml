@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dell.test.GymCreateActivity">
+    tools:context="com.example.dell.test.AddEquipmentActivity">
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="新建体育馆"
-        android:textSize="25dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:id="@+id/textView4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="48dp"
+    android:text="添加设施"
+    android:textSize="25dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_gym_create_name"
+        android:id="@+id/textView_add_equipment_name"
         android:layout_width="56dp"
         android:layout_height="0dp"
         android:layout_marginStart="72dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText_gym_create_name"
+        android:id="@+id/editText_add_equipment_name"
         android:layout_width="216dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
@@ -42,18 +42,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_gym_create_address"
-        android:layout_width="56dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="72dp"
+        android:id="@+id/textView_add_equipment_start_time"
+        android:layout_width="84dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="188dp"
-        android:text="地址"
+        android:text="起始时间"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText_gym_create_address"
+        android:id="@+id/editText_add_equipment_start_time"
         android:layout_width="216dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
@@ -66,18 +66,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_gym_create_phone"
-        android:layout_width="56dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="72dp"
+        android:id="@+id/textView_add_equipment_end_time"
+        android:layout_width="84dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="252dp"
-        android:text="电话"
+        android:text="结束时间"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText_gym_create_phone"
+        android:id="@+id/editText_add_equipment_end_time"
         android:layout_width="216dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
@@ -89,41 +89,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView_gym_create_contact"
-        android:layout_width="71dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="316dp"
-        android:text="联系人"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText_gym_create_contact"
-        android:layout_width="216dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="308dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.812"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:onClick="GymCreate"
+        android:layout_marginBottom="76dp"
+        android:onClick="AddEquipment"
         android:text="确认"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

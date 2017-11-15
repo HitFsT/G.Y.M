@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -43,7 +44,7 @@ public class StudentActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "还没想好放点什么", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -71,6 +72,13 @@ public class StudentActivity extends AppCompatActivity
         }catch(Exception e){
             DialogUtil.showDialog(this, e.getMessage());
         }
+        CardView cardview = findViewById(R.id.card_view_staff_3);
+        cardview.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentActivity.this, GymStudentActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -126,10 +134,10 @@ public class StudentActivity extends AppCompatActivity
         } else if (id == R.id.nav_student_plan) {
             Intent intent = new Intent(this, StudentPlanActivity.class);
             startActivity(intent);
-        }/* else if (id == R.id.nav_contact_us) {
+        } else if (id == R.id.nav_contact_us) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
             dialog.setTitle("联系我们");
-            dialog.setMessage("邮箱:396433458@qq.com\n电话:XXXXXXXXX");
+            dialog.setMessage("邮箱:396433458@qq.com\n电话:13946162640");
             dialog.setCancelable(false);
             dialog.setPositiveButton("OK", new DialogInterface.
                     OnClickListener() {
@@ -138,7 +146,7 @@ public class StudentActivity extends AppCompatActivity
             });
             dialog.show();
 
-        }*/else if (id == R.id.nav_student_logout) {
+        }else if (id == R.id.nav_student_logout) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(StudentActivity.this);
             dialog.setTitle("退出登录");
             dialog.setMessage("确定退出登录吗?");

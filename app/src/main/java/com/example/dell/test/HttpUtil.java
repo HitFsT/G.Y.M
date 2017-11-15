@@ -28,7 +28,7 @@ import java.util.concurrent.FutureTask;
 public class HttpUtil {
     public static HttpClient httpClient = new DefaultHttpClient();
     public static final String BASE_URL =
-            "69.171.68.142:3306/GYM";
+            "http://69.171.68.142:8080/GYM/";
 
     public static String postRequest(final String url,
          final Map<String, String> rawParams) throws Exception{

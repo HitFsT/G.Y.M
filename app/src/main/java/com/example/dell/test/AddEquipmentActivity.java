@@ -5,48 +5,42 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-
-public class StaffActivity extends AppCompatActivity {
+public class AddEquipmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_staff);
-        CardView cardview = findViewById(R.id.card_view_staff);
-        cardview.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(StaffActivity.this, GymStaffActivity.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_add_equipment);
+    }
 
-        ImageView imageview = findViewById(R.id.imageView_add);
-        imageview.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(StaffActivity.this, GymCreateActivity.class);
+    public void AddEquipment(View view) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(AddEquipmentActivity.this);
+        dialog.setTitle("添加信息");
+        dialog.setMessage("添加成功");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("OK", new DialogInterface.
+                OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(AddEquipmentActivity.this, StaffEquipmentActivity.class);
                 startActivity(intent);
             }
         });
+        dialog.show();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
-            AlertDialog.Builder dialog = new AlertDialog.Builder(StaffActivity.this);
-            dialog.setTitle("退出登录");
-            dialog.setMessage("确定退出登录吗?");
+            AlertDialog.Builder dialog = new AlertDialog.Builder(AddEquipmentActivity.this);
+            dialog.setTitle("退出添加");
+            dialog.setMessage("确定取消添加吗?");
             dialog.setCancelable(false);
             dialog.setPositiveButton("OK", new DialogInterface.
                     OnClickListener() {
                 public void onClick(DialogInterface dialog, int which)  {
-                    Intent intent = new Intent(StaffActivity.this, MainActivity.class);
+                    Intent intent = new Intent(AddEquipmentActivity.this, GymStaffActivity.class);
                     startActivity(intent);
                 }
             });
@@ -59,5 +53,4 @@ public class StaffActivity extends AppCompatActivity {
         }
         return false;
     }
-
 }
