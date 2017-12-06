@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dell.test.GymStudentActivity">
+    tools:context="com.example.dell.test.Student.GymStudentActivity">
 
     <ImageView
         android:id="@+id/imageView_gym"
@@ -52,8 +52,8 @@
 
     <Button
         android:id="@+id/button_card_edit"
-        android:layout_width="83dp"
-        android:layout_height="35dp"
+        android:layout_width="86dp"
+        android:layout_height="37dp"
         android:layout_marginTop="40dp"
         android:onClick="ReserveEquipment"
         android:text="预订设施"
@@ -64,8 +64,8 @@
 
     <Button
         android:id="@+id/button_card_staff_equipment"
-        android:layout_width="83dp"
-        android:layout_height="35dp"
+        android:layout_width="86dp"
+        android:layout_height="37dp"
         android:layout_marginTop="8dp"
         android:onClick="InqueryGame"
         android:text="查询比赛"

@@ -1,10 +1,13 @@
-package com.example.dell.test;
+package com.example.dell.test.Main;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+
+import com.example.dell.test.R;
+import com.example.dell.test.Staff.StaffLoginActivity;
+import com.example.dell.test.Student.StudentLoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

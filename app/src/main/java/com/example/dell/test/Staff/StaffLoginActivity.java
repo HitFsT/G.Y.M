@@ -1,10 +1,12 @@
-package com.example.dell.test;
+package com.example.dell.test.Staff;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.dell.test.R;
 
 public class StaffLoginActivity extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class StaffLoginActivity extends AppCompatActivity {
     public void StaffLogin(View view) {
         Intent intent = new Intent(this, StaffActivity.class);
         startActivity(intent);
+        finish();
     }
 
 

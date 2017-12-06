@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dell.test.GymStaffActivity">
+    tools:context="com.example.dell.test.Staff.GymStaffActivity">
 
     <ImageView
         android:id="@+id/imageView_gym"
@@ -54,8 +54,8 @@
 
     <Button
         android:id="@+id/button_card_edit"
-        android:layout_width="83dp"
-        android:layout_height="35dp"
+        android:layout_width="86dp"
+        android:layout_height="37dp"
         android:layout_marginTop="24dp"
         android:onClick="Edit"
         android:text="编辑信息"
@@ -66,8 +66,8 @@
 
     <Button
         android:id="@+id/button_card_staff_equipment"
-        android:layout_width="83dp"
-        android:layout_height="35dp"
+        android:layout_width="86dp"
+        android:layout_height="37dp"
         android:layout_marginTop="8dp"
         android:onClick="StaffEquipment"
         android:text="我的设施"
@@ -77,8 +77,8 @@
 
     <Button
         android:id="@+id/button_card_staff_game"
-        android:layout_width="83dp"
-        android:layout_height="35dp"
+        android:layout_width="86dp"
+        android:layout_height="37dp"
         android:layout_marginTop="8dp"
         android:onClick="StaffGame"
         android:text="我的比赛"

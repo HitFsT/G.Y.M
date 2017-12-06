@@ -1,4 +1,4 @@
-package com.example.dell.test;
+package com.example.dell.test.Student;
 
 import android.content.Intent;
 import android.os.StrictMode;
@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.apache.http.protocol.HTTP;
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.R;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -42,6 +45,7 @@ public class StudentLoginActivity extends AppCompatActivity {
             if(loginPro()){
                 Intent intent = new Intent(this, StudentActivity.class);
                 startActivity(intent);
+                finish();
             }else{
                 DialogUtil.showDialog(this, "用户名或密码错误");
             }

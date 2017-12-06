@@ -1,10 +1,14 @@
-package com.example.dell.test;
+package com.example.dell.test.Student;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.R;
 
 import org.json.JSONArray;
 

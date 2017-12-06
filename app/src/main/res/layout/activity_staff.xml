@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dell.test.StaffActivity">
+    tools:context="com.example.dell.test.Staff.StaffActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -16,83 +16,11 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view_staff"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="88dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView_gym"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_mygym" />
-
-        <TextView
-            android:id="@+id/textView_gym_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="45dp"
-            android:text="哈尔滨工业大学体育馆"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textView_gym_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="90dp"
-            android:text="地址：圆通快递菜鸟驿站对面"
-            android:textSize="10dp" />
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view_staff2"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_view_staff">
-
-        <ImageView
-            android:id="@+id/imageView_gym2"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_mygym" />
-
-        <TextView
-            android:id="@+id/textView_gym_id2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="45dp"
-            android:text="哈尔滨工业大学体育馆"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textView_gym_address2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="90dp"
-            android:text="地址：圆通快递菜鸟驿站对面"
-            android:textSize="10dp" />
-    </android.support.v7.widget.CardView>
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
 
     <ImageView

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dell.test.StudentReservationActivity">
+    tools:context="com.example.dell.test.Student.StudentReservationActivity">
 
     <TextView
         android:id="@+id/textView_header_student_reservation"

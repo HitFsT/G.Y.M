@@ -1,4 +1,4 @@
-package com.example.dell.test;
+package com.example.dell.test.Http;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;

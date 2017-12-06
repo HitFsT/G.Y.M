@@ -1,12 +1,12 @@
-package com.example.dell.test;
+package com.example.dell.test.Staff;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+
+import com.example.dell.test.R;
 
 public class StaffEquipmentActivity extends AppCompatActivity {
 
@@ -24,8 +24,7 @@ public class StaffEquipmentActivity extends AppCompatActivity {
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
-            Intent intent = new Intent(StaffEquipmentActivity.this, GymStaffActivity.class);
-            startActivity(intent);
+            finish();
         }
         return false;
     }

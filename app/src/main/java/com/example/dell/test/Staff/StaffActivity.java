@@ -1,4 +1,4 @@
-package com.example.dell.test;
+package com.example.dell.test.Staff;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,12 +6,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.example.dell.test.Main.MainActivity;
+import com.example.dell.test.R;
 
 
 public class StaffActivity extends AppCompatActivity {
@@ -20,13 +20,13 @@ public class StaffActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff);
-        CardView cardview = findViewById(R.id.card_view_staff);
-        cardview.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(StaffActivity.this, GymStaffActivity.class);
-                startActivity(intent);
-            }
-        });
+//        CardView cardview = findViewById(R.id.card_view_staff);
+//        cardview.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                Intent intent = new Intent(StaffActivity.this, GymStaffActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         ImageView imageview = findViewById(R.id.imageView_add);
         imageview.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +46,7 @@ public class StaffActivity extends AppCompatActivity {
             dialog.setPositiveButton("OK", new DialogInterface.
                     OnClickListener() {
                 public void onClick(DialogInterface dialog, int which)  {
-                    Intent intent = new Intent(StaffActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
             });
             dialog.setNegativeButton("Cancel", new DialogInterface.
