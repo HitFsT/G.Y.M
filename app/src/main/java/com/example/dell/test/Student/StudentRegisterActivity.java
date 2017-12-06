@@ -47,9 +47,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
     }
 
     private boolean validate(){
+        String confir = confirm.getText().toString().trim();
         String username = user_name.getText().toString().trim();
         String pwd = password.getText().toString().trim();
-        String confirm = password.getText().toString().trim();
+
         Log.d("check if:", pwd+" "+confirm );
         if(username.equals("")){
             DialogUtil.showDialog(this, "用户账户是必填项！");
@@ -59,7 +60,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
             DialogUtil.showDialog(this, "用户密码是必填项！");
             return false;
         }
-        if(!pwd.equals(confirm)){
+        if(!pwd.equals(confir)){
             DialogUtil.showDialog(this, "两次密码不正确！");
             return false;
         }
@@ -95,6 +96,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Map<String, String> map = new HashMap<>();
         map.put("user", username);
         map.put("pass", pwd);
+        map.put("staff", "0");
         String url = HttpUtil.BASE_URL + "Register";
 
         return new JSONObject(HttpUtil.postRequest(url, map));

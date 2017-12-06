@@ -39,22 +39,20 @@ public class StudentLoginActivity extends AppCompatActivity {
         /* send the username and password and check if they are valid
         if so then go to the StudentActivity, otherwise do something to handle
         it.*/
-        Intent intent = new Intent(this, StudentActivity.class);
-        startActivity(intent);
-//        etName = (EditText) findViewById(R.id.editText_student_id);
-//        etPass = (EditText) findViewById(R.id.editText_student_password);
-//        if(validate()){
-//            if(loginPro()){
-//                Intent intent = new Intent(this, StudentActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }else{
-//                DialogUtil.showDialog(this, "用户名或密码错误");
-//            }
-//        }else{
-//            etName.setText("");
-//            etPass.setText("");
-//        }
+        etName = (EditText) findViewById(R.id.editText_student_id);
+        etPass = (EditText) findViewById(R.id.editText_student_password);
+        if(validate()){
+            if(loginPro()){
+                Intent intent = new Intent(this, StudentActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                DialogUtil.showDialog(this, "用户名或密码错误");
+            }
+        }else{
+            etName.setText("");
+            etPass.setText("");
+        }
     }
 
 
@@ -102,6 +100,7 @@ public class StudentLoginActivity extends AppCompatActivity {
         Map<String, String> map = new HashMap<>();
         map.put("user", username);
         map.put("pass", pwd);
+        map.put("staff","0");
         String url = HttpUtil.BASE_URL + "LoginServlet";
 
         return new JSONObject(HttpUtil.postRequest(url, map));

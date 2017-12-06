@@ -33,6 +33,7 @@ public class AddEquipmentActivity extends AppCompatActivity {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
         if (keyCode == KeyEvent.KEYCODE_BACK) {//当返回按键被按下
             AlertDialog.Builder dialog = new AlertDialog.Builder(AddEquipmentActivity.this);
             dialog.setTitle("退出添加");
