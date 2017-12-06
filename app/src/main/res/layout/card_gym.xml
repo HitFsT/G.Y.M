@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/gymView"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_marginLeft="8dp"
@@ -9,25 +10,43 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp">
 
-    <ImageView
-        android:id="@+id/gymImage"
-        android:layout_width="150dp"
-        android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/gymName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="45dp"
-        android:textSize="20dp" />
+        <ImageView
+            android:id="@+id/gymImage"
+            android:layout_width="150dp"
+            android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/gymAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="90dp"
-        android:textSize="14dp" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/gymName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:maxLines="1"/>
+
+            <TextView
+                android:id="@+id/gymAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14dp"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </android.support.v7.widget.CardView>

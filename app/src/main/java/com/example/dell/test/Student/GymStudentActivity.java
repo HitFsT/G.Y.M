@@ -18,6 +18,10 @@ public class GymStudentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gym_student);
+
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position", 0);
+
         TextView gym_name = (TextView) findViewById(R.id.textView_gym_id);
         TextView gym_address = (TextView) findViewById(R.id.textView_gym_address);
         TextView gym_phone = (TextView) findViewById(R.id.textView_gym_phone);
