@@ -1,5 +1,7 @@
 package com.example.dell.test.Gym;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by DELL on 2017/12/6.
  */
@@ -7,12 +9,12 @@ package com.example.dell.test.Gym;
 public class Gym {
     private String name;
     private String address;
-    private int imageID;
+    private Bitmap image;
 
-    public Gym(String name, String address, int imageID){
+    public Gym(String name, String address, Bitmap image){
         this.name = name;
         this.address = address;
-        this.imageID = imageID;
+        this.image = image;
     }
 
     public String getName() {
@@ -23,7 +25,7 @@ public class Gym {
         return address;
     }
 
-    public int getImageID() {
-        return imageID;
+    public Bitmap getImage() {
+        return image;
     }
 }

@@ -1,5 +1,9 @@
 package com.example.dell.test.Http;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -10,11 +14,16 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by 龙 on 2017/11/11.
@@ -74,5 +83,21 @@ public class HttpUtil {
                 });
         new Thread(task).start();
         return task.get();
+    }
+
+    /* Download the picture from the url, the result is Bitmap type*/
+    public static Bitmap getpic(String picurl){
+        try {
+            URL url = new URL(picurl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        }catch (Exception e){
+            Log.d(TAG,e.getMessage());
+        }
+        return null;
     }
 }

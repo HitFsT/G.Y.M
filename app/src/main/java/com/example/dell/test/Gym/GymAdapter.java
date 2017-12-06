@@ -47,7 +47,7 @@ public class GymAdapter extends RecyclerView.Adapter<GymAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
         Gym gym = mGymList.get(position);
-        holder.gymImage.setImageResource(gym.getImageID());
+        holder.gymImage.setImageBitmap(gym.getImage());
         holder.gymName.setText(gym.getName());
         holder.gymAddress.setText(gym.getAddress());
     }

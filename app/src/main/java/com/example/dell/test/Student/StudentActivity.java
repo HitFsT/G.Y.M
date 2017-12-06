@@ -2,6 +2,10 @@ package com.example.dell.test.Student;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Picture;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +35,7 @@ import com.example.dell.test.Main.MainActivity;
 import com.example.dell.test.R;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -211,11 +216,21 @@ public class StudentActivity extends AppCompatActivity
         return false;
     }
 
+
     private void initGym(){
-        for (int i=0;i<=10;i++)
-        {
-            Gym gym = new Gym("哈工大体育馆", "圆通快递菜鸟驿站对面", R.drawable.ic_mygym);
-            gymList.add(gym);
+        try{
+            JSONArray gyms = getGymlist();
+            for (int i = 0; i < gyms.length(); i++)
+            {
+                String name = gyms.getJSONObject(i).getString("gym_name");
+                String address = gyms.getJSONObject(i).getString("gym_address");
+                String picture_url = gyms.getJSONObject(i).getString("gym_picture");
+                Bitmap myBitmap = HttpUtil.getpic(picture_url);
+                Gym gym = new Gym(name, address, myBitmap);
+                gymList.add(gym);
+            }
+        }catch(Exception e){
+            DialogUtil.showDialog(this, e.getMessage());
         }
     }
 }
