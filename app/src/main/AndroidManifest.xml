@@ -31,7 +31,8 @@
             android:label="gym"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Student.StudentReservationActivity" />
-        <activity android:name=".Student.StudentTimeActivity" />
+        <activity android:name=".Student.StudentTimeActivity"
+            android:label="我的比赛"/>
         <activity android:name=".Student.StudentPlanActivity" />
         <activity android:name=".Staff.StaffLoginActivity" />
         <activity android:name=".Staff.StaffRegisterActivity" />

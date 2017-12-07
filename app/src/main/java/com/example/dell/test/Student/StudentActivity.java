@@ -55,7 +55,7 @@ public class StudentActivity extends AppCompatActivity
         setContentView(R.layout.activity_student);
 
         initGym();  //gym数据
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_student);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         GymAdapter adapter = new GymAdapter(gymList);
