@@ -12,13 +12,31 @@ public class Game {
     private String address;
     private int start;
     private int end;
+    private boolean selected;
 
-    public Game(String name, String address, int start, int end){
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setStart(int start) {
+
         this.start = start;
+    }
+
+
+    public void setEnd(int end) {
         this.end = end;
     }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+
 
     public String getName(){
         return name;
@@ -34,5 +52,9 @@ public class Game {
 
     public int getEnd() {
         return end;
+    }
+
+    public boolean isSelected() {
+        return selected;
     }
 }

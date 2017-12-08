@@ -47,7 +47,8 @@
         <activity android:name=".Staff.GymCreateActivity" />
         <activity android:name=".Student.GymStudentActivity" />
         <activity android:name=".Student.ReserveEquipmentActivity" />
-        <activity android:name=".Student.InqueryGameActivity" />
+        <activity android:name=".Student.InqueryGameActivity"
+            android:label="查询比赛"/>
         <activity android:name=".Staff.AddEquipmentActivity" />
         <activity android:name=".Staff.AddGameActivity"></activity>
     </application>

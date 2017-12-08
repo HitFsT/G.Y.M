@@ -38,7 +38,11 @@ public class StudentTimeActivity extends AppCompatActivity {
 
     private void initGame() {
         for (int i = 0; i < 10; i++) {
-            Game game = new Game("足球比赛", "哈工大体育馆", 10, 12);
+            Game game = new Game();
+            game.setName("足球比赛");
+            game.setAddress("哈工大体育馆");
+            game.setStart(10);
+            game.setEnd(12);
             gameList.add(game);
         }
     }
