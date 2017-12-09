@@ -14,7 +14,7 @@ import org.json.JSONObject;
  */
 
 public class EquipmentORM {
-    private static final String TAG = "GymORM";
+    private static final String TAG = "EquipORM";
 
     private static final String TABLE_NAME = "equip";
 
