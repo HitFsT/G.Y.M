@@ -32,7 +32,9 @@ import android.widget.Toast;
 import com.example.dell.test.Gym.Gym;
 import com.example.dell.test.Gym.GymAdapter;
 import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.GymORM;
 import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.Main.MainActivity;
 import com.example.dell.test.R;
 
@@ -221,7 +223,7 @@ public class StudentActivity extends AppCompatActivity
 
     private void initGym(){
         try{
-            JSONArray gyms = getGymlist();
+            JSONArray gyms = cacheGymlist();
             for (int i = 0; i < gyms.length(); i++)
             {
                 String name = gyms.getJSONObject(i).getString("gym_name");
@@ -234,5 +236,24 @@ public class StudentActivity extends AppCompatActivity
         }catch(Exception e){
             DialogUtil.showDialog(this, e.getMessage());
         }
+    }
+
+    public  JSONArray cacheGymlist(){
+        JSONArray gyms = new JSONArray();
+        if(RefreshORM.get(this,"gym")>=0){
+            if(RefreshORM.get(this,"gym") == 1){
+                try{
+                    gyms = getGymlist();
+                    GymORM.insertGyms(this,gyms);
+                }catch(Exception e){
+                    DialogUtil.showDialog(this, e.getMessage());
+                }
+            }else{
+                gyms = GymORM.getGyms(this);
+            }
+        }else{
+            DialogUtil.showDialog(this, "缓存出错");
+        }
+        return gyms;
     }
 }

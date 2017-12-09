@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.GymORM;
 import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 
 import org.json.JSONArray;
@@ -26,7 +28,7 @@ public class GymStudentActivity extends AppCompatActivity {
         TextView gym_address = (TextView) findViewById(R.id.textView_gym_address);
         TextView gym_phone = (TextView) findViewById(R.id.textView_gym_phone);
         try {
-            JSONArray gym_list = getGymlist();
+            JSONArray gym_list = cacheGymlist();
             gym_name.setText(gym_list.getJSONObject(0).getString("gym_name"));
             gym_address.setText("地址：" + gym_list.getJSONObject(0).getString("gym_address"));
             gym_phone.setText("电话：" + gym_list.getJSONObject(0).getString("gym_phone" )+
@@ -34,6 +36,25 @@ public class GymStudentActivity extends AppCompatActivity {
         }catch(Exception e){
             DialogUtil.showDialog(this, e.getMessage());
         }
+    }
+
+    public  JSONArray cacheGymlist(){
+        JSONArray gyms = new JSONArray();
+        if(RefreshORM.get(this,"gym")>=0){
+            if(RefreshORM.get(this,"gym") == 1){
+                try{
+                    gyms = getGymlist();
+                    GymORM.insertGyms(this,gyms);
+                }catch(Exception e){
+                    DialogUtil.showDialog(this, e.getMessage());
+                }
+            }else{
+                gyms = GymORM.getGyms(this);
+            }
+        }else{
+            DialogUtil.showDialog(this, "缓存出错");
+        }
+        return gyms;
     }
 
     private JSONArray getGymlist() throws Exception{
