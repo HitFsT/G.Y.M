@@ -30,7 +30,8 @@
             android:name=".Student.StudentActivity"
             android:label="gym"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Student.StudentReservationActivity" />
+        <activity android:name=".Student.StudentReservationActivity"
+            android:label="我的预约"/>
         <activity android:name=".Student.StudentTimeActivity"
             android:label="我的比赛"/>
         <activity android:name=".Student.StudentPlanActivity" />
@@ -46,7 +47,8 @@
         <activity android:name=".Staff.StaffGameActivity" />
         <activity android:name=".Staff.GymCreateActivity" />
         <activity android:name=".Student.GymStudentActivity" />
-        <activity android:name=".Student.ReserveEquipmentActivity" />
+        <activity android:name=".Student.ReserveEquipmentActivity"
+            android:label="预约设施"/>
         <activity android:name=".Student.InqueryGameActivity"
             android:label="查询比赛"/>
         <activity android:name=".Staff.AddEquipmentActivity" />
