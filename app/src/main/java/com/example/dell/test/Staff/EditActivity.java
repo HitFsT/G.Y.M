@@ -7,15 +7,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 
+import com.example.dell.test.Gym.Gym;
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 
-public class EditActivity extends AppCompatActivity {
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static java.lang.String.valueOf;
+
+public class EditActivity extends AppCompatActivity {
+    EditText name, address, phone, contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        name = (EditText) findViewById(R.id.editText_gym_edit_name);
+        address = (EditText) findViewById(R.id.editText_gym_edit_address);
+        phone = (EditText) findViewById(R.id.editText_gym_edit_phone);
+        contact = (EditText) findViewById(R.id.editText_gym_edit_contact);
     }
     public void Edit(View view){
         AlertDialog.Builder dialog = new AlertDialog.Builder(EditActivity.this);
@@ -25,6 +41,17 @@ public class EditActivity extends AppCompatActivity {
         dialog.setPositiveButton("OK", new DialogInterface.
                 OnClickListener() {
             public void onClick(DialogInterface dialog, int which)  {
+                String gym_name = name.getText().toString().trim();
+                String gym_address = address.getText().toString().trim();
+                String gym_phone = phone.getText().toString().trim();
+                String gym_contact = contact.getText().toString().trim();
+                try{
+                    update_gym(gym_name, gym_address, gym_phone, gym_contact);
+                    RefreshORM.setfalse(EditActivity.this, "gym");
+                }catch(Exception e){
+                    DialogUtil.showDialog(EditActivity.this, e.getMessage());
+                }
+
                 finish();
             }
         });
@@ -52,4 +79,18 @@ public class EditActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    private JSONObject update_gym(String gym_name, String gym_address, String gym_phone, String gym_contact) throws Exception{
+        Map<String, String> map = new HashMap<>();
+        map.put("gym_id", valueOf(Gym.getGym_id()));
+        DialogUtil.showDialog(this, valueOf(Gym.getGym_id()));
+        map.put("gym_name", gym_name);
+        map.put("gym_name", gym_address);
+        map.put("gym_name", gym_phone);
+        map.put("gym_name", gym_contact);
+        String url = HttpUtil.BASE_URL + "UpdateGym";
+        return new JSONObject(HttpUtil.postRequest(url, map));
+    }
+
+
 }

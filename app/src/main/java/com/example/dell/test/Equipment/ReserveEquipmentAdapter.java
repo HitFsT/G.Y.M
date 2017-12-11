@@ -112,6 +112,8 @@ public class ReserveEquipmentAdapter extends RecyclerView.Adapter<ReserveEquipme
         return mEquipmentList.size();
     }
 
+
+
     public void update_id(int equip_id, int user_id){
         Map<String, String> map = new HashMap<>();
         map.put("equip_id", String.valueOf(equip_id));

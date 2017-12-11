@@ -8,7 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dell.test.Gym.Gym;
+import com.example.dell.test.Http.Cache;
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.GymORM;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
+
+import org.json.JSONArray;
 
 public class GymStaffActivity extends AppCompatActivity {
 
@@ -24,6 +32,17 @@ public class GymStaffActivity extends AppCompatActivity {
         TextView gym_name = (TextView) findViewById(R.id.textView_gym_staff_name);
         TextView gym_address = (TextView) findViewById(R.id.textView_gym_staff_address);
         TextView gym_contact = (TextView) findViewById(R.id.textView_gym_staff_contact);
+        try {
+            JSONArray gym_list = Cache.cacheGymlist(this);
+            Gym.setGym_id(gym_list.getJSONObject(position).getInt("gym_id"));
+            gym_image.setImageBitmap(HttpUtil.getpic(gym_list.getJSONObject(position).getString("gym_picture")));
+            gym_name.setText(gym_list.getJSONObject(position).getString("gym_name"));
+            gym_address.setText("地址：" + gym_list.getJSONObject(position).getString("gym_address"));
+            gym_contact.setText("电话：" + gym_list.getJSONObject(position).getString("gym_phone" )+
+                    " 联系人："+ gym_list.getJSONObject(position).getString("gym_contact" ));
+        }catch(Exception e){
+            DialogUtil.showDialog(this, e.getMessage());
+        }
 
         /******************这里用position set GYMSTAFF界面  参考GYMSTUDENT********************/
     }
