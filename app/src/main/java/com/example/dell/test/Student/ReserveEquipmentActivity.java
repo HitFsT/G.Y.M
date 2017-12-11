@@ -25,7 +25,7 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_equipment);
 
-        initGame();  //game数据
+        initEquipment();  //equipment数据
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_reserve_equipment);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -34,7 +34,7 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
 
     }
 
-    private void initGame() {
+    private void initEquipment() {
         for (int i = 0; i < 5; i++) {
             Equipment equipment = new Equipment();
             equipment.setName("篮球场");
