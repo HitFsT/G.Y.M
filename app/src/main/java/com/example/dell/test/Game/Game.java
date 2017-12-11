@@ -12,6 +12,25 @@ public class Game {
     private String address;
     private String start;
     private String end;
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getGame_id() {
+        return game_id;
+    }
+
+    public void setGame_id(int game_id) {
+        this.game_id = game_id;
+    }
+
+    private int user_id;
+    private int game_id;
     private boolean selected;
 
     public void setName(String name) {

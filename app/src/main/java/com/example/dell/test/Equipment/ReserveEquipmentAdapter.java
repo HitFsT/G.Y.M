@@ -105,8 +105,7 @@ public class ReserveEquipmentAdapter extends RecyclerView.Adapter<ReserveEquipme
         String url = HttpUtil.BASE_URL + "Reserve";
         try{
             HttpUtil.postRequest(url, map);
-        }catch (Exception e){
-        }
+        }catch (Exception e){}
 
     }
 }

@@ -48,6 +48,8 @@ public class InqueryGameActivity extends AppCompatActivity {
             for (int i = 0; i < games.length(); i++) {
                 Game game = new Game();
                 game.setName(games.getJSONObject(i).getString("competition_name"));
+                game.setGame_id(games.getJSONObject(i).getInt("competition_id"));
+                game.setUser_id(RefreshORM.get(this, "user_id"));
                 game.setStart(games.getJSONObject(i).getString("competition_start"));
                 game.setEnd(games.getJSONObject(i).getString("competition_end"));
                 game.setSelected(false);

@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dell.test.Http.HttpUtil;
 import com.example.dell.test.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -50,6 +53,7 @@ public class GameReservationAdapter extends RecyclerView.Adapter<GameReservation
                 Game game = mGameList.get(position);
                 if (game.isSelected()) {
                     game.setSelected(false);
+                    update_id(game.getGame_id(), game.getUser_id());
                     Log.d("我的输出", String.format("sss%d",position));
                     holder.gameImage.setImageResource(R.drawable.ic_circle);
                 }
@@ -80,5 +84,16 @@ public class GameReservationAdapter extends RecyclerView.Adapter<GameReservation
     @Override
     public int getItemCount(){
         return mGameList.size();
+    }
+
+    public void update_id(int game_id, int user_id){
+        Map<String, String> map = new HashMap<>();
+        map.put("game_id", String.valueOf(game_id));
+        map.put("user_id", String.valueOf(user_id));
+        String url = HttpUtil.BASE_URL + "Reserve";
+        try{
+            HttpUtil.postRequest(url, map);
+        }catch (Exception e){}
+
     }
 }
