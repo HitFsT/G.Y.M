@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dell.test.Http.Cache;
 import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.GymORM;
 import com.example.dell.test.Http.HttpUtil;
@@ -27,12 +29,16 @@ public class GymStudentActivity extends AppCompatActivity {
         TextView gym_name = (TextView) findViewById(R.id.textView_gym_id);
         TextView gym_address = (TextView) findViewById(R.id.textView_gym_address);
         TextView gym_phone = (TextView) findViewById(R.id.textView_gym_phone);
+        ImageView gym_image = (ImageView) findViewById(R.id.imageView_gym);
+
         try {
-            JSONArray gym_list = cacheGymlist();
+            JSONArray gym_list = Cache.cacheGymlist(this);
+            gym_image.setImageBitmap(HttpUtil.getpic(gym_list.getJSONObject(position).getString("gym_picture")));
             gym_name.setText(gym_list.getJSONObject(0).getString("gym_name"));
             gym_address.setText("地址：" + gym_list.getJSONObject(0).getString("gym_address"));
             gym_phone.setText("电话：" + gym_list.getJSONObject(0).getString("gym_phone" )+
                     " 联系人："+ gym_list.getJSONObject(0).getString("gym_contact" ));
+
         }catch(Exception e){
             DialogUtil.showDialog(this, e.getMessage());
         }

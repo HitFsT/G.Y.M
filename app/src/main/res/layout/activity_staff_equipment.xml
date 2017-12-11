@@ -9,13 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我的设施"
-        android:textAlignment="center"
-        android:textSize="25dp"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_staff_equipment"
         android:layout_width="match_parent"

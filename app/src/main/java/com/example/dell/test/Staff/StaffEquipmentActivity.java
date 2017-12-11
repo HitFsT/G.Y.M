@@ -1,10 +1,14 @@
 package com.example.dell.test.Staff;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.dell.test.Equipment.Equipment;
 import com.example.dell.test.Equipment.StaffEquipmentAdapter;
@@ -28,13 +32,25 @@ public class StaffEquipmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_equipment);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_staff);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("我的设施");
+
         initEquip();  //equipment数据
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_staff_equipment);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         StaffEquipmentAdapter adapter = new StaffEquipmentAdapter(equipmentList);
+        adapter.setActivity(StaffEquipmentActivity.this);
         recyclerView.setAdapter(adapter);
 
+        ImageView imageview = findViewById(R.id.imageView_add);
+        imageview.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(StaffEquipmentActivity.this, AddEquipmentActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
