@@ -80,4 +80,5 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
     public int getItemCount(){
         return mEquipmentList.size();
     }
+
 }
