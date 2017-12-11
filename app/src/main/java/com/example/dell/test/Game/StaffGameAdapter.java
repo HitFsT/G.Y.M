@@ -1,9 +1,7 @@
-package com.example.dell.test.Equipment;
+package com.example.dell.test.Game;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dell.test.R;
-import com.example.dell.test.Staff.StaffEquipmentActivity;
+import com.example.dell.test.Staff.StaffGameActivity;
 
 import java.util.List;
 
@@ -22,9 +20,9 @@ import java.util.List;
  * Created by DELL on 2017/12/11.
  */
 
-public class StaffEquipmentAdapter extends RecyclerView.Adapter<StaffEquipmentAdapter.ViewHolder> {
+public class StaffGameAdapter extends RecyclerView.Adapter<StaffGameAdapter.ViewHolder> {
 
-    private List<Equipment> mEquipmentList;
+    private List<Game> mGameList;
     private AppCompatActivity activity;
 
     public void setActivity(AppCompatActivity activity) {
@@ -36,33 +34,33 @@ public class StaffEquipmentAdapter extends RecyclerView.Adapter<StaffEquipmentAd
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView equipmentName;
-        TextView equipmentTime;
-        ImageView equipmentClear;
+        TextView gameName;
+        TextView gameTime;
+        ImageView gameClear;
 
         public ViewHolder(View view){
             super(view);
-            equipmentName = (TextView) view.findViewById(R.id.staff_equipment_name);
-            equipmentTime = (TextView) view.findViewById(R.id.staff_equipment_time);
-            equipmentClear = (ImageView) view.findViewById(R.id.staff_equipment_clear);
+            gameName = (TextView) view.findViewById(R.id.staff_game_name);
+            gameTime = (TextView) view.findViewById(R.id.staff_game_time);
+            gameClear = (ImageView) view.findViewById(R.id.staff_game_clear);
 
         }
     }
 
-    public StaffEquipmentAdapter(List<Equipment> equipmentList){
-        mEquipmentList = equipmentList;
+    public StaffGameAdapter(List<Game> gameList){
+        mGameList = gameList;
     }
 
     @Override
-    public StaffEquipmentAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType){
+    public StaffGameAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_staff_equipment, parent ,false);
-        final StaffEquipmentAdapter.ViewHolder holder = new StaffEquipmentAdapter.ViewHolder(view);
-        holder.equipmentClear.setOnClickListener(new View.OnClickListener(){
+                .inflate(R.layout.item_staff_game, parent ,false);
+        final StaffGameAdapter.ViewHolder holder = new StaffGameAdapter.ViewHolder(view);
+        holder.gameClear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Equipment equipment = mEquipmentList.get(position);
+                Game game = mGameList.get(position);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(parent.getContext());
                 dialog.setTitle("删除信息");
                 dialog.setMessage("是否删除?" + "龙哥这里需要重要的逻辑");
@@ -74,10 +72,8 @@ public class StaffEquipmentAdapter extends RecyclerView.Adapter<StaffEquipmentAd
                          * *********删除*******
                          * **************/
                         activity.finish();
-                        Intent intent = new Intent(parent.getContext(), StaffEquipmentActivity.class);
+                        Intent intent = new Intent(parent.getContext(), StaffGameActivity.class);
                         parent.getContext().startActivity(intent);
-
-
                     }
                 });
                 dialog.setNegativeButton("Cancel", new DialogInterface.
@@ -92,16 +88,16 @@ public class StaffEquipmentAdapter extends RecyclerView.Adapter<StaffEquipmentAd
     }
 
     @Override
-    public void onBindViewHolder(StaffEquipmentAdapter.ViewHolder holder, int position){
-        Equipment equipment = mEquipmentList.get(position);
-        holder.equipmentName.setText(equipment.getName());
-        holder.equipmentTime.setText(equipment.getStart() + ":00-" + equipment.getEnd() + ":00");
-        holder.equipmentClear.setImageResource(R.drawable.ic_clear);
+    public void onBindViewHolder(StaffGameAdapter.ViewHolder holder, int position){
+        Game game = mGameList.get(position);
+        holder.gameName.setText(game.getName());
+        holder.gameTime.setText(game.getStart() + ":00-" + game.getEnd() + ":00");
+        holder.gameClear.setImageResource(R.drawable.ic_clear);
 
     }
 
     @Override
     public int getItemCount(){
-        return mEquipmentList.size();
+        return mGameList.size();
     }
 }
