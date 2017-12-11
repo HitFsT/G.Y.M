@@ -245,11 +245,14 @@ public class StudentActivity extends AppCompatActivity
                 try{
                     gyms = getGymlist();
                     GymORM.insertGyms(this,gyms);
+                    RefreshORM.setfalse(this,"gym");
                 }catch(Exception e){
                     DialogUtil.showDialog(this, e.getMessage());
                 }
             }else{
+                DialogUtil.showDialog(this, "使用缓存");
                 gyms = GymORM.getGyms(this);
+                RefreshORM.setfalse(this,"gym");
             }
         }else{
             DialogUtil.showDialog(this, "缓存出错");

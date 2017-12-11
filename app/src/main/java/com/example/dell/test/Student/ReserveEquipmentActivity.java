@@ -11,7 +11,14 @@ import android.widget.TextView;
 
 import com.example.dell.test.Equipment.Equipment;
 import com.example.dell.test.Equipment.ReserveEquipmentAdapter;
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.EquipmentORM;
+import com.example.dell.test.Http.GymORM;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +32,7 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_equipment);
 
-        initGame();  //game数据
+        initEquip();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_reserve_equipment);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -34,21 +41,50 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
 
     }
 
-    private void initGame() {
-        for (int i = 0; i < 5; i++) {
-            Equipment equipment = new Equipment();
-            equipment.setName("篮球场");
-            equipment.setStart(10);
-            equipment.setEnd(12);
-            equipment.setSelected(false);
-            equipmentList.add(equipment);
-
-            Equipment equipment2 = new Equipment();
-            equipment2.setName("足球场");
-            equipment2.setStart(15);
-            equipment2.setEnd(17);
-            equipment2.setSelected(true);
-            equipmentList.add(equipment2);
+    private void initEquip() {
+        JSONArray equips = cacheEquip();
+        try{
+            for (int i = 0; i < equips.length(); i++) {
+                Equipment equipment = new Equipment();
+                equipment.setName(equips.getJSONObject(i).getString("equip_name"));
+                equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
+                equipment.setId(RefreshORM.get(this, "user_id"));
+                DialogUtil.showDialog(this,"用户id"+equipment.getId());
+                DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
+                equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
+                equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
+                equipment.setSelected(false);
+                equipmentList.add(equipment);
+            }
+        }catch(Exception e){
+            DialogUtil.showDialog(this,e.getMessage());
         }
+
+    }
+
+    public JSONArray cacheEquip(){
+        JSONArray equips = new JSONArray();
+        if(RefreshORM.get(this,"equip")>=0){
+            if(RefreshORM.get(this,"equip") == 1){
+                try{
+                    equips = getEquips();
+                    EquipmentORM.insertEquips(this,equips);
+                    RefreshORM.setfalse(this, "equip");
+                }catch(Exception e){
+                    DialogUtil.showDialog(this, e.getMessage());
+                }
+            }else{
+                DialogUtil.showDialog(this, "使用缓存");
+                equips = EquipmentORM.getEquips(this);
+            }
+        }else{
+            DialogUtil.showDialog(this, "缓存出错");
+        }
+        return equips;
+    }
+
+    private JSONArray getEquips() throws Exception{
+        String url = HttpUtil.BASE_URL + "UserEquip";
+        return new JSONArray(HttpUtil.getRequest(url));
     }
 }

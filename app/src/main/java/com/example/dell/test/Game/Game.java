@@ -10,8 +10,8 @@ public class Game {
 
     private String name;
     private String address;
-    private int start;
-    private int end;
+    private String start;
+    private String end;
     private boolean selected;
 
     public void setName(String name) {
@@ -22,13 +22,13 @@ public class Game {
         this.address = address;
     }
 
-    public void setStart(int start) {
+    public void setStart(String start) {
 
         this.start = start;
     }
 
 
-    public void setEnd(int end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 
@@ -46,11 +46,11 @@ public class Game {
         return address;
     }
 
-    public int getStart() {
+    public String getStart() {
         return start;
     }
 
-    public int getEnd() {
+    public String getEnd() {
         return end;
     }
 

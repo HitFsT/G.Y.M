@@ -12,7 +12,14 @@ import android.widget.TextView;
 import com.example.dell.test.Game.Game;
 import com.example.dell.test.Game.GameAdapter;
 import com.example.dell.test.Game.GameReservationAdapter;
+import com.example.dell.test.Http.CompetitionORM;
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.EquipmentORM;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,14 +42,47 @@ public class InqueryGameActivity extends AppCompatActivity {
     }
 
     private void initGame() {
-        for (int i = 0; i < 10; i++) {
-            Game game = new Game();
-            game.setName("足球比赛");
-            game.setStart(10);
-            game.setEnd(12);
-            game.setSelected(false);
-            gameList.add(game);
+        JSONArray games = new JSONArray();
+        try{
+            games = cacheGames();
+            for (int i = 0; i < games.length(); i++) {
+                Game game = new Game();
+                game.setName(games.getJSONObject(i).getString("competition_name"));
+                game.setStart(games.getJSONObject(i).getString("competition_start"));
+                game.setEnd(games.getJSONObject(i).getString("competition_end"));
+                game.setSelected(false);
+                gameList.add(game);
+            }
+        }catch (Exception e){
+            DialogUtil.showDialog(this, e.getMessage());
         }
+
+    }
+
+    public JSONArray cacheGames(){
+        JSONArray games = new JSONArray();
+        if(RefreshORM.get(this,"competition")>=0){
+            if(RefreshORM.get(this,"competition") == 1){
+                try{
+                    games = getGames();
+                    CompetitionORM.insertGames(this,games);
+                    RefreshORM.setfalse(this, "competition");
+                }catch(Exception e){
+                    DialogUtil.showDialog(this, e.getMessage());
+                }
+            }else{
+                DialogUtil.showDialog(this, "使用缓存");
+                games = CompetitionORM.getGames(this);
+            }
+        }else{
+            DialogUtil.showDialog(this, "缓存出错");
+        }
+        return games;
+    }
+
+    private JSONArray getGames() throws Exception{
+        String url = HttpUtil.BASE_URL + "UserCompet";
+        return new JSONArray(HttpUtil.getRequest(url));
     }
 }
 

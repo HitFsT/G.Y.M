@@ -6,12 +6,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by DELL on 2017/12/9.
@@ -50,6 +56,7 @@ public class ReserveEquipmentAdapter extends RecyclerView.Adapter<ReserveEquipme
                 Equipment equipment = mEquipmentList.get(position);
                 if (!equipment.isSelected()) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(parent.getContext());
+                    update_id(equipment.getEquip_id(), equipment.getId());
                     dialog.setTitle("确认信息");
                     dialog.setMessage("预约成功");
                     dialog.setCancelable(false);
@@ -62,6 +69,8 @@ public class ReserveEquipmentAdapter extends RecyclerView.Adapter<ReserveEquipme
                     equipment.setSelected(true);
                     holder.equipmentReserve.setText("已预约");
                     holder.equipmentReserve.setTextColor(Color.parseColor("#616161"));
+                } else{
+
                 }
 
             }
@@ -87,5 +96,17 @@ public class ReserveEquipmentAdapter extends RecyclerView.Adapter<ReserveEquipme
     @Override
     public int getItemCount(){
         return mEquipmentList.size();
+    }
+
+    public void update_id(int equip_id, int user_id){
+        Map<String, String> map = new HashMap<>();
+        map.put("equip_id", String.valueOf(equip_id));
+        map.put("user_id", String.valueOf(user_id));
+        String url = HttpUtil.BASE_URL + "Reserve";
+        try{
+            HttpUtil.postRequest(url, map);
+        }catch (Exception e){
+        }
+
     }
 }

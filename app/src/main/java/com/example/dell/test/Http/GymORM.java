@@ -38,26 +38,26 @@ public class GymORM {
         }
     }
 
-    public static void insertgym(Context context, JSONObject equip) {
+    public static void insertgym(Context context, JSONObject gym) {
         DatabaseWrapper databaseWrapper = new DatabaseWrapper(context);
         SQLiteDatabase database = databaseWrapper.getWritableDatabase();
 
-        ContentValues values = gymToContentValues(equip);
-        long equipId = database.insert(GymORM.TABLE_NAME, "null", values);
-        Log.i(TAG, "Inserted new Post with ID: " + equipId);
+        ContentValues values = gymToContentValues(gym);
+        long gymId = database.insert(GymORM.TABLE_NAME, "null", values);
+        DialogUtil.showDialog(context, "Inserted new Post with ID: " + gymId);
 
     }
 
 
-    private static ContentValues gymToContentValues(JSONObject equip) {
+    private static ContentValues gymToContentValues(JSONObject gym) {
         ContentValues values = new ContentValues();
         try{
-            values.put("gym_id", equip.getInt("equip_id"));
-            values.put("gym_name", equip.getString("gym_name"));
-            values.put("gym_address", equip.getString("gym_address"));
-            values.put("gym_contact", equip.getString("gym_contact"));
-            values.put("gym_phone", equip.getString("gym_phone"));
-            values.put("gym_picture", equip.getString("gym_picture"));
+            values.put("gym_id", gym.getInt("gym_id"));
+            values.put("gym_name", gym.getString("gym_name"));
+            values.put("gym_address", gym.getString("gym_address"));
+            values.put("gym_contact", gym.getString("gym_contact"));
+            values.put("gym_phone", gym.getString("gym_phone"));
+            values.put("gym_picture", gym.getString("gym_picture"));
         }catch (Exception e){
             Log.i(TAG, e.getMessage());
         }
@@ -75,7 +75,6 @@ public class GymORM {
 
         Log.i(TAG, "Loaded " + cursor.getCount() + " Posts...");
         JSONArray gyms = new JSONArray();
-
         if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -96,8 +95,8 @@ public class GymORM {
             gym.put("gym_id", cursor.getInt(cursor.getColumnIndex("gym_id")))
                     .put("gym_name", cursor.getString(cursor.getColumnIndex("gym_name")))
                     .put("gym_address", cursor.getString(cursor.getColumnIndex("gym_address")))
-                    .put("gym_phone", cursor.getString(cursor.getColumnIndex("gym_phone")))
                     .put("gym_contact", cursor.getString(cursor.getColumnIndex("gym_contact")))
+                    .put("gym_phone", cursor.getString(cursor.getColumnIndex("gym_phone")))
                     .put("gym_picture", cursor.getString(cursor.getColumnIndex("gym_picture")));
         }catch (Exception e){
             Log.i(TAG, e.getMessage());

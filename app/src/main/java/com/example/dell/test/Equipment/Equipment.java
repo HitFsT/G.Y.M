@@ -6,10 +6,28 @@ package com.example.dell.test.Equipment;
 
 public class Equipment {
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getEquip_id() {
+        return equip_id;
+    }
+
+    public void setEquip_id(int equip_id) {
+        this.equip_id = equip_id;
+    }
+
+    private int equip_id;
+    private int id;
     private String name;
     private String address;
-    private int start;
-    private int end;
+    private String start;
+    private String end;
     private boolean selected;
 
     public String getName() {
@@ -28,19 +46,19 @@ public class Equipment {
         this.address = address;
     }
 
-    public int getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(int start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public int getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(int end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 
