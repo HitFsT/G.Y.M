@@ -59,6 +59,7 @@ public class StudentActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         GymAdapter adapter = new GymAdapter(gymList);
+        adapter.setIndex(0);
         recyclerView.setAdapter(adapter);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
