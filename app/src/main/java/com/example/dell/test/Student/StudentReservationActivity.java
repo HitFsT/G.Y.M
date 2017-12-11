@@ -51,6 +51,7 @@ public class StudentReservationActivity extends AppCompatActivity {
                 if(equips.getJSONObject(i).getInt("equip_user_id") == RefreshORM.get(this, "user_id")){
                     Equipment equipment = new Equipment();
                     equipment.setName(equips.getJSONObject(i).getString("equip_name"));
+                    equipment.setName(equips.getJSONObject(i).getString("equip_name"));
                     equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
                     equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
                     equipment.setSelected(true);

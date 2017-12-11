@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 import com.example.dell.test.R;
+import com.example.dell.test.Staff.GymStaffActivity;
 import com.example.dell.test.Student.GymStudentActivity;
 
 
@@ -24,6 +25,16 @@ import java.util.List;
 public class GymAdapter extends RecyclerView.Adapter<GymAdapter.ViewHolder>{
 
     private List<Gym> mGymList;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    private int index; // 0 means student, 1 means staff
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         View gymView;
@@ -54,9 +65,16 @@ public class GymAdapter extends RecyclerView.Adapter<GymAdapter.ViewHolder>{
             public void onClick(View v){
                 int position = holder.getAdapterPosition();
                 Gym gym = mGymList.get(position);
-                Intent intent = new Intent(parent.getContext(), GymStudentActivity.class);
-                intent.putExtra("position", position);
-                parent.getContext().startActivity(intent);
+                if (index == 0) {
+                    Intent intent = new Intent(parent.getContext(), GymStudentActivity.class);
+                    intent.putExtra("position", position);
+                    parent.getContext().startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(parent.getContext(), GymStaffActivity.class);
+                    intent.putExtra("position", position);
+                    parent.getContext().startActivity(intent);
+                }
             }
         });
 

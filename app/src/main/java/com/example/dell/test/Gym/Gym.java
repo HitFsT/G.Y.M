@@ -7,6 +7,16 @@ import android.graphics.Bitmap;
  */
 
 public class Gym {
+    private static int gym_id;
+
+    public static int getGym_id() {
+        return gym_id;
+    }
+
+    public static void setGym_id(int gym_id) {
+        Gym.gym_id = gym_id;
+    }
+
     private String name;
     private String address;
     private Bitmap image;

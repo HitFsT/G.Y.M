@@ -43,8 +43,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Staff.GymStaffActivity" />
         <activity android:name=".Staff.EditActivity" />
-        <activity android:name=".Staff.StaffEquipmentActivity" />
-        <activity android:name=".Staff.StaffGameActivity" />
+        <activity android:name=".Staff.StaffEquipmentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Staff.StaffGameActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Staff.GymCreateActivity" />
         <activity android:name=".Student.GymStudentActivity" />
         <activity android:name=".Student.ReserveEquipmentActivity"

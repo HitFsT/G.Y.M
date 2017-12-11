@@ -21,8 +21,8 @@ public class GymStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gym_student);
 
-        Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
+        Intent get_intent = getIntent();
+        int position = get_intent.getIntExtra("position", 0);
 
         TextView gym_name = (TextView) findViewById(R.id.textView_gym_id);
         TextView gym_address = (TextView) findViewById(R.id.textView_gym_address);
