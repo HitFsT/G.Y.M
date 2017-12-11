@@ -28,6 +28,7 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        DialogUtil.showDialog(EditActivity.this, valueOf(Gym.getGym_id()));
         name = (EditText) findViewById(R.id.editText_gym_edit_name);
         address = (EditText) findViewById(R.id.editText_gym_edit_address);
         phone = (EditText) findViewById(R.id.editText_gym_edit_phone);
@@ -83,11 +84,10 @@ public class EditActivity extends AppCompatActivity {
     private JSONObject update_gym(String gym_name, String gym_address, String gym_phone, String gym_contact) throws Exception{
         Map<String, String> map = new HashMap<>();
         map.put("gym_id", valueOf(Gym.getGym_id()));
-        DialogUtil.showDialog(this, valueOf(Gym.getGym_id()));
         map.put("gym_name", gym_name);
-        map.put("gym_name", gym_address);
-        map.put("gym_name", gym_phone);
-        map.put("gym_name", gym_contact);
+        map.put("gym_address", gym_address);
+        map.put("gym_phone", gym_phone);
+        map.put("gym_contact", gym_contact);
         String url = HttpUtil.BASE_URL + "UpdateGym";
         return new JSONObject(HttpUtil.postRequest(url, map));
     }
