@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.example.dell.test.Equipment.Equipment;
 import com.example.dell.test.Equipment.StaffEquipmentAdapter;
+import com.example.dell.test.Gym.Gym;
 import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.EquipmentORM;
 import com.example.dell.test.Http.HttpUtil;
@@ -64,16 +65,18 @@ public class StaffEquipmentActivity extends AppCompatActivity {
         JSONArray equips = cacheEquip();
         try{
             for (int i = 0; i < equips.length(); i++) {
-                Equipment equipment = new Equipment();
-                equipment.setName(equips.getJSONObject(i).getString("equip_name"));
-                equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
-                equipment.setId(RefreshORM.get(this, "user_id"));
-                DialogUtil.showDialog(this,"用户id"+equipment.getId());
-                DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
-                equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
-                equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
-                equipment.setSelected(false);
-                equipmentList.add(equipment);
+                if(Gym.getGym_id() == equips.getJSONObject(i).getInt("equip_gym_id")){
+                    Equipment equipment = new Equipment();
+                    equipment.setName(equips.getJSONObject(i).getString("equip_name"));
+                    equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
+                    equipment.setId(RefreshORM.get(this, "user_id"));
+                    DialogUtil.showDialog(this,"用户id"+equipment.getId());
+                    DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
+                    equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
+                    equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
+                    equipment.setSelected(false);
+                    equipmentList.add(equipment);
+                }
             }
         }catch(Exception e){
             DialogUtil.showDialog(this,e.getMessage());

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 import com.example.dell.test.Student.StudentActivity;
 
@@ -67,6 +68,7 @@ public class StaffLoginActivity extends AppCompatActivity {
             jsonObj = query(username, pwd);
             Log.d("test user name", username );
             if((temp = jsonObj.getInt("user_id"))>0){
+                RefreshORM.iniRefresh(this, temp);
                 return true;
             }else{
                 DialogUtil.showDialog(this, Integer.toString(temp));

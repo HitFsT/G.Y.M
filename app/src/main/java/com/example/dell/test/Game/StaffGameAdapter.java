@@ -11,10 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dell.test.Gym.Gym;
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 import com.example.dell.test.Staff.StaffGameActivity;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.String.valueOf;
 
 /**
  * Created by DELL on 2017/12/11.
@@ -60,7 +70,7 @@ public class StaffGameAdapter extends RecyclerView.Adapter<StaffGameAdapter.View
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Game game = mGameList.get(position);
+                final Game game = mGameList.get(position);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(parent.getContext());
                 dialog.setTitle("删除信息");
                 dialog.setMessage("是否删除?" + "龙哥这里需要重要的逻辑");
@@ -68,6 +78,16 @@ public class StaffGameAdapter extends RecyclerView.Adapter<StaffGameAdapter.View
                 dialog.setPositiveButton("OK", new DialogInterface.
                         OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        int gym_id = Gym.getGym_id();
+                        DialogUtil.showDialog(parent.getContext(), valueOf(gym_id));
+                        int game_id = game.getGame_id();
+                        DialogUtil.showDialog(parent.getContext(), valueOf(game_id));
+                        try{
+                            delete(gym_id, game_id);
+                            RefreshORM.settrue(parent.getContext(), "game");
+                        }catch (Exception e){
+                            DialogUtil.showDialog(parent.getContext(), e.getMessage());
+                        }
                         /*************
                          * *********删除*******
                          * **************/
@@ -99,5 +119,15 @@ public class StaffGameAdapter extends RecyclerView.Adapter<StaffGameAdapter.View
     @Override
     public int getItemCount(){
         return mGameList.size();
+    }
+
+    private JSONObject delete(int gym_id, int game_id) throws Exception{
+        Map<String, String> map = new HashMap<>();
+        map.put("gym_id", valueOf(gym_id));
+        map.put("equip_id", valueOf(game_id));
+        /* 0 means delete */
+        map.put("operation", valueOf(0));
+        String url = HttpUtil.BASE_URL + "EditGame";
+        return new JSONObject(HttpUtil.postRequest(url, map));
     }
 }

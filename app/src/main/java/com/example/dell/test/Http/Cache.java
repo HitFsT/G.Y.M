@@ -35,4 +35,30 @@ public class Cache {
         String url = HttpUtil.BASE_URL + "GymList";
         return new JSONArray(HttpUtil.getRequest(url));
     }
+
+    public static JSONArray cacheGames(Context context){
+        JSONArray games = new JSONArray();
+        if(RefreshORM.get(context,"competition")>=0){
+            if(RefreshORM.get(context,"competition") == 1){
+                try{
+                    games = getGames();
+                    CompetitionORM.insertGames(context,games);
+                    RefreshORM.setfalse(context, "competition");
+                }catch(Exception e){
+                    DialogUtil.showDialog(context, e.getMessage());
+                }
+            }else{
+                DialogUtil.showDialog(context, "使用缓存");
+                games = CompetitionORM.getGames(context);
+            }
+        }else{
+            DialogUtil.showDialog(context, "缓存出错");
+        }
+        return games;
+    }
+
+    private static JSONArray getGames() throws Exception{
+        String url = HttpUtil.BASE_URL + "UserCompet";
+        return new JSONArray(HttpUtil.getRequest(url));
+    }
 }

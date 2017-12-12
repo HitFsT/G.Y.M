@@ -48,7 +48,7 @@ public class EditActivity extends AppCompatActivity {
                 String gym_contact = contact.getText().toString().trim();
                 try{
                     update_gym(gym_name, gym_address, gym_phone, gym_contact);
-                    RefreshORM.setfalse(EditActivity.this, "gym");
+                    RefreshORM.settrue(EditActivity.this, "gym");
                 }catch(Exception e){
                     DialogUtil.showDialog(EditActivity.this, e.getMessage());
                 }

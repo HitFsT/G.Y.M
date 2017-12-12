@@ -15,7 +15,13 @@ import com.example.dell.test.Equipment.Equipment;
 import com.example.dell.test.Equipment.StaffEquipmentAdapter;
 import com.example.dell.test.Game.Game;
 import com.example.dell.test.Game.StaffGameAdapter;
+import com.example.dell.test.Gym.Gym;
+import com.example.dell.test.Http.Cache;
+import com.example.dell.test.Http.DialogUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +64,27 @@ public class StaffGameActivity extends AppCompatActivity {
         return false;
     }
 
-    public void initGame() {
-        Game game = new Game();
-        game.setName("足球");
-        game.setStart("1");
-        game.setEnd("5");
-        gameList.add(game);
+    private void initGame() {
+        JSONArray games = Cache.cacheGames(this);
+        try{
+            for (int i = 0; i < games.length(); i++) {
+                if(Gym.getGym_id() == games.getJSONObject(i).getInt("competition_gym_id")){
+                    Game game = new Game();
+                    game.setName(games.getJSONObject(i).getString("game_name"));
+                    game.setGame_id(games.getJSONObject(i).getInt("game_id"));
+                    game.setUser_id(RefreshORM.get(this, "user_id"));
+                    DialogUtil.showDialog(this,"用户id"+game.getUser_id());
+                    DialogUtil.showDialog(this,"Equip_id"+game.getGame_id());
+                    game.setStart(games.getJSONObject(i).getString("game_start"));
+                    game.setEnd(games.getJSONObject(i).getString("game_end"));
+                    game.setSelected(false);
+                    gameList.add(game);
+                }
+            }
+        }catch(Exception e){
+            DialogUtil.showDialog(this,e.getMessage());
+        }
+
     }
+
 }

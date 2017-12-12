@@ -9,13 +9,19 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.dell.test.Gym.Gym;
+import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.HttpUtil;
+import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.String.valueOf;
 
 public class AddGameActivity extends AppCompatActivity {
     EditText game_name, game_start, game_end;
@@ -25,6 +31,7 @@ public class AddGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_game);
         Intent get_intent = getIntent();
         int position = get_intent.getIntExtra("position", 0);
+        DialogUtil.showDialog(this, valueOf(Gym.getGym_id()));
         game_name = (EditText) findViewById(R.id.editText_add_game_name);
         game_start = (EditText) findViewById(R.id.editText_add_game_start_time);
         game_end = (EditText) findViewById(R.id.editText_add_game_end_time);
@@ -32,16 +39,21 @@ public class AddGameActivity extends AppCompatActivity {
 
     public void AddGame(View view) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(AddGameActivity.this);
-        String name = game_name.getText().toString().trim();
-        String start = game_start.getText().toString().trim();
-        String end = game_end.getText().toString().trim();
-        insert_game(name, start, end);
         dialog.setTitle("添加信息");
         dialog.setMessage("添加成功");
         dialog.setCancelable(false);
         dialog.setPositiveButton("OK", new DialogInterface.
                 OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                String name = game_name.getText().toString().trim();
+                String start = game_start.getText().toString().trim();
+                String end = game_end.getText().toString().trim();
+                try{
+                    add_game(name, start, end);
+                    RefreshORM.settrue(AddGameActivity.this, "game");
+                }catch (Exception e){
+                    DialogUtil.showDialog(AddGameActivity.this, e.getMessage());
+                }
                 finish();
             }
         });
@@ -70,12 +82,16 @@ public class AddGameActivity extends AppCompatActivity {
         return false;
     }
 
-    public void insert_game(String name, String start, String end){
+    private JSONObject add_game(String name, String start, String end) throws Exception{
         Map<String, String> map = new HashMap<>();
-        map.put("game_name", name);
-        map.put("game_start", name);
-        map.put("game_end", name);
-        String url = HttpUtil.BASE_URL + "InsertGame";
-
+        /* 1 means add */
+        map.put("operation", valueOf(1));
+        map.put("gym_id", valueOf(Gym.getGym_id()));
+        map.put("name", name);
+        map.put("start", start);
+        map.put("end", end);
+        String url = HttpUtil.BASE_URL + "EditGame";
+        return new JSONObject(HttpUtil.postRequest(url, map));
     }
+
 }

@@ -51,7 +51,7 @@ public class HttpUtil {
                     for(String key: rawParams.keySet()){
                         params.add(new BasicNameValuePair(key, rawParams.get(key)));
                     }
-                    post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
+                    post.setEntity(new UrlEncodedFormEntity(params));
                     HttpResponse httpResponse;
                     httpResponse = httpClient.execute(post);
                     if(httpResponse.getStatusLine().getStatusCode()==200){
@@ -75,7 +75,7 @@ public class HttpUtil {
                         HttpResponse httpResponse;
                         httpResponse = httpClient.execute(get);
                         if(httpResponse.getStatusLine().getStatusCode()==200){
-                            String result = EntityUtils.toString(httpResponse.getEntity());
+                            String result = EntityUtils.toString(httpResponse.getEntity(),"ISO-8859-1");
                             return result;
                         }
                         return null;
