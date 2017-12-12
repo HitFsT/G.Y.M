@@ -19,9 +19,14 @@ import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.String.valueOf;
 
 public class ReserveEquipmentActivity extends AppCompatActivity {
 
@@ -42,8 +47,8 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
     }
 
     private void initEquip() {
-        JSONArray equips = cacheEquip();
         try{
+            JSONArray equips = cacheEquip();
             for (int i = 0; i < equips.length(); i++) {
                 Equipment equipment = new Equipment();
                 equipment.setName(equips.getJSONObject(i).getString("equip_name"));
@@ -82,9 +87,12 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
         }
         return equips;
     }
-
     private JSONArray getEquips() throws Exception{
         String url = HttpUtil.BASE_URL + "UserEquip";
         return new JSONArray(HttpUtil.getRequest(url));
     }
+
+
+
+
 }

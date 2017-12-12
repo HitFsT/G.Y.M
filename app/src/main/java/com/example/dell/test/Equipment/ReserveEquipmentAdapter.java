@@ -64,16 +64,17 @@ public class ReserveEquipmentAdapter extends RecyclerView.Adapter<ReserveEquipme
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Equipment equipment = mEquipmentList.get(position);
+                final Equipment equipment = mEquipmentList.get(position);
                 if (!equipment.isSelected()) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(parent.getContext());
-                    update_id(equipment.getEquip_id(), equipment.getId());
                     dialog.setTitle("确认信息");
                     dialog.setMessage("预约成功");
                     dialog.setCancelable(false);
                     dialog.setPositiveButton("OK", new DialogInterface.
                             OnClickListener() {
                         public void onClick(DialogInterface dialog, int which)  {
+                            update_id(equipment.getEquip_id(), equipment.getId());
+                            RefreshORM.settrue(parent.getContext(), "equip");
                         }
                     });
                     dialog.show();
@@ -116,8 +117,11 @@ public class ReserveEquipmentAdapter extends RecyclerView.Adapter<ReserveEquipme
 
     public void update_id(int equip_id, int user_id){
         Map<String, String> map = new HashMap<>();
-        map.put("equip_id", String.valueOf(equip_id));
+        /* 1 means insert */
+        map.put("operation", "1");
+        map.put("item_id", String.valueOf(equip_id));
         map.put("user_id", String.valueOf(user_id));
+        map.put("type", "1");
         String url = HttpUtil.BASE_URL + "Reserve";
         try{
             HttpUtil.postRequest(url, map);

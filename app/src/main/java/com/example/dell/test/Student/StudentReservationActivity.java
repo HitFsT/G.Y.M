@@ -17,7 +17,11 @@ import com.example.dell.test.R;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.String.valueOf;
 
 public class StudentReservationActivity extends AppCompatActivity {
 
@@ -38,25 +42,18 @@ public class StudentReservationActivity extends AppCompatActivity {
 
     public void initEquip(){
         JSONArray equips = new JSONArray();
-        JSONArray gyms = new JSONArray();
-        try{
-            equips = getEquips();
-            gyms = cacheGymlist();
-        }catch(Exception e){
-
-        }
 
         try {
+            equips = getEquips();
+            DialogUtil.showDialog(this, equips.toString());
             for (int i = 0; i < equips.length(); i++){
-                if(equips.getJSONObject(i).getInt("equip_user_id") == RefreshORM.get(this, "user_id")){
-                    Equipment equipment = new Equipment();
-                    equipment.setName(equips.getJSONObject(i).getString("equip_name"));
-                    equipment.setName(equips.getJSONObject(i).getString("equip_name"));
-                    equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
-                    equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
-                    equipment.setSelected(true);
-                    EquipmentList.add(equipment);
-                }
+                Equipment equipment = new Equipment();
+                equipment.setName(equips.getJSONObject(i).getString("equip_name"));
+                equipment.setName(equips.getJSONObject(i).getString("equip_name"));
+                equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
+                equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
+                equipment.setSelected(true);
+                EquipmentList.add(equipment);
 
             }
         }catch (Exception e) {
@@ -88,8 +85,14 @@ public class StudentReservationActivity extends AppCompatActivity {
     }
 
     private JSONArray getEquips() throws Exception{
-        String url = HttpUtil.BASE_URL + "UserEquip";
-        return new JSONArray(HttpUtil.getRequest(url));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", valueOf(RefreshORM.get(this, "user_id")));
+        DialogUtil.showDialog(this, valueOf(RefreshORM.get(this, "user_id")));
+        /* type 1 means equipment */
+        map.put("type", "1");
+        String url = HttpUtil.BASE_URL + "ReserRequest";
+
+        return new JSONArray(HttpUtil.postRequest(url, map));
     }
 
     private JSONArray getGymlist() throws Exception{

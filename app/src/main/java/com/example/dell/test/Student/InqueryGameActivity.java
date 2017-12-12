@@ -22,7 +22,11 @@ import com.example.dell.test.R;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.String.valueOf;
 
 public class InqueryGameActivity extends AppCompatActivity {
 
@@ -43,7 +47,7 @@ public class InqueryGameActivity extends AppCompatActivity {
 
     private void initGame() {
         JSONArray games = new JSONArray();
-        try{
+        try {
             games = cacheGames();
             for (int i = 0; i < games.length(); i++) {
                 Game game = new Game();
@@ -55,36 +59,42 @@ public class InqueryGameActivity extends AppCompatActivity {
                 game.setSelected(false);
                 gameList.add(game);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             DialogUtil.showDialog(this, e.getMessage());
         }
 
     }
 
-    public JSONArray cacheGames(){
+    public JSONArray cacheGames() {
         JSONArray games = new JSONArray();
-        if(RefreshORM.get(this,"competition")>=0){
-            if(RefreshORM.get(this,"competition") == 1){
-                try{
+        if (RefreshORM.get(this, "competition") >= 0) {
+            if (RefreshORM.get(this, "competition") == 1) {
+                try {
                     games = getGames();
-                    CompetitionORM.insertGames(this,games);
+                    CompetitionORM.insertGames(this, games);
                     RefreshORM.setfalse(this, "competition");
-                }catch(Exception e){
+                } catch (Exception e) {
                     DialogUtil.showDialog(this, e.getMessage());
                 }
-            }else{
+            } else {
                 DialogUtil.showDialog(this, "使用缓存");
                 games = CompetitionORM.getGames(this);
             }
-        }else{
+        } else {
             DialogUtil.showDialog(this, "缓存出错");
         }
         return games;
     }
 
-    private JSONArray getGames() throws Exception{
-        String url = HttpUtil.BASE_URL + "UserCompet";
-        return new JSONArray(HttpUtil.getRequest(url));
+    private JSONArray getGames() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", valueOf(RefreshORM.get(this, "user_id")));
+        /* type 1 means equipment */
+        map.put("type", "0");
+        String url = HttpUtil.BASE_URL + "ReserRequest";
+
+        return new JSONArray(HttpUtil.postRequest(url, map));
+
     }
 }
 

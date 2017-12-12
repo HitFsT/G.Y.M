@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dell.test.Http.HttpUtil;
 import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by DELL on 2017/12/9.
@@ -49,9 +52,11 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Equipment equipment = mEquipmentList.get(position);
+                final Equipment equipment = mEquipmentList.get(position);
                 if (equipment.isSelected()) {
                     equipment.setSelected(false);
+                    delete(RefreshORM.get(parent.getContext(), "user_id"), equipment.getEquip_id());
+                    RefreshORM.settrue(parent.getContext(),"equip");
                     Log.d("我的输出", String.format("sss%d",position));
                     holder.equipmentImage.setImageResource(R.drawable.ic_circle);
                 }
@@ -82,4 +87,17 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
         return mEquipmentList.size();
     }
 
+    public void delete(int equip_id, int user_id){
+        Map<String, String> map = new HashMap<>();
+        /* 0 means delete */
+        map.put("operation", "0");
+        map.put("item_id", String.valueOf(equip_id));
+        map.put("user_id", String.valueOf(user_id));
+        map.put("type", "1");
+        String url = HttpUtil.BASE_URL + "Reserve";
+        try{
+            HttpUtil.postRequest(url, map);
+        }catch (Exception e){}
+
+    }
 }
