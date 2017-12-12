@@ -1,9 +1,13 @@
 package com.example.dell.test.Student;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.dell.test.Equipment.Equipment;
 import com.example.dell.test.Equipment.EquipmentAdapter;
@@ -27,6 +31,20 @@ public class StudentReservationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reservation);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_student_refresh);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("我的预约");
+
+        ImageView refresh = (ImageView) findViewById(R.id.imageView_refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentReservationActivity.this, StudentReservationActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         initEquip();  //game数据
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_student_reservation);

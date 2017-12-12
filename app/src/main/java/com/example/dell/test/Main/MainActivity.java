@@ -1,6 +1,8 @@
 package com.example.dell.test.Main;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
     }
 
     public void StudentLogin(View view) {
@@ -27,4 +31,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, StaffLoginActivity.class);
         startActivity(intent);
     }
+
+
 }

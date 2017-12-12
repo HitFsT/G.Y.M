@@ -1,9 +1,13 @@
 package com.example.dell.test.Student;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.dell.test.Game.Game;
 import com.example.dell.test.Game.GameAdapter;
@@ -26,6 +30,20 @@ public class StudentTimeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_time);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_student_refresh);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("我的比赛");
+
+        ImageView refresh = (ImageView) findViewById(R.id.imageView_refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentTimeActivity.this, StudentTimeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         initGame();  //game数据
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_student_time);

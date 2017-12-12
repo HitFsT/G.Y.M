@@ -30,10 +30,12 @@
             android:name=".Student.StudentActivity"
             android:label="gym"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Student.StudentReservationActivity"
-            android:label="我的预约"/>
-        <activity android:name=".Student.StudentTimeActivity"
-            android:label="我的比赛"/>
+        <activity
+            android:name=".Student.StudentReservationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Student.StudentTimeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Student.StudentPlanActivity" />
         <activity android:name=".Staff.StaffLoginActivity" />
         <activity android:name=".Staff.StaffRegisterActivity" />
@@ -43,18 +45,32 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Staff.GymStaffActivity" />
         <activity android:name=".Staff.EditActivity" />
-        <activity android:name=".Staff.StaffEquipmentActivity"
+        <activity
+            android:name=".Staff.StaffEquipmentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Staff.StaffGameActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Staff.StaffGameActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Staff.GymCreateActivity" />
         <activity android:name=".Student.GymStudentActivity" />
-        <activity android:name=".Student.ReserveEquipmentActivity"
-            android:label="预约设施"/>
-        <activity android:name=".Student.InqueryGameActivity"
-            android:label="查询比赛"/>
+        <activity
+            android:name=".Student.ReserveEquipmentActivity"
+            android:label="预约设施" />
+        <activity
+            android:name=".Student.InqueryGameActivity"
+            android:label="查询比赛" />
         <activity android:name=".Staff.AddEquipmentActivity" />
-        <activity android:name=".Staff.AddGameActivity"></activity>
+        <activity android:name=".Staff.AddGameActivity" />
+        <activity android:name=".Staff.AddPhotoActivity"></activity>
+        <provider
+            android:authorities=".Staff.AddPhotoActivity.fileprovider"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

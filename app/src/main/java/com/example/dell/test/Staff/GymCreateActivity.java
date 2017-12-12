@@ -20,13 +20,20 @@ public class GymCreateActivity extends AppCompatActivity {
 
     public void GymCreate (View view){
         AlertDialog.Builder dialog = new AlertDialog.Builder(GymCreateActivity.this);
-        dialog.setTitle("创建信息");
-        dialog.setMessage("创建成功");
+        dialog.setTitle("确认信息");
+        dialog.setMessage("请确认信息无误\n按OK进入下一步");
         dialog.setCancelable(false);
         dialog.setPositiveButton("OK", new DialogInterface.
                 OnClickListener() {
             public void onClick(DialogInterface dialog, int which)  {
+                Intent intent = new Intent(GymCreateActivity.this, AddPhotoActivity.class);
+                startActivity(intent);
                 finish();
+            }
+        });
+        dialog.setNegativeButton("Cancel", new DialogInterface.
+                OnClickListener() {
+            public void onClick(DialogInterface dialog, int which)  {
             }
         });
         dialog.show();
