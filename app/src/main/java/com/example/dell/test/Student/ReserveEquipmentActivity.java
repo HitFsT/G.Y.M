@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.dell.test.Equipment.Equipment;
+import com.example.dell.test.Equipment.Reserve;
 import com.example.dell.test.Equipment.ReserveEquipmentAdapter;
+import com.example.dell.test.Gym.Gym;
 import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.EquipmentORM;
 import com.example.dell.test.Http.GymORM;
@@ -50,16 +52,18 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
         try{
             JSONArray equips = cacheEquip();
             for (int i = 0; i < equips.length(); i++) {
-                Equipment equipment = new Equipment();
-                equipment.setName(equips.getJSONObject(i).getString("equip_name"));
-                equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
-                equipment.setId(RefreshORM.get(this, "user_id"));
-                DialogUtil.showDialog(this,"用户id"+equipment.getId());
-                DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
-                equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
-                equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
-                equipment.setSelected(false);
-                equipmentList.add(equipment);
+                if(equips.getJSONObject(i).getInt("equip_gym_id") == Gym.getGym_id()){
+                    Equipment equipment = new Equipment();
+                    equipment.setName(equips.getJSONObject(i).getString("equip_name"));
+                    equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
+                    equipment.setId(RefreshORM.get(this, "user_id"));
+                    DialogUtil.showDialog(this,"用户id"+equipment.getId());
+                    DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
+                    equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
+                    equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
+                    equipment.setSelected(false);
+                    equipmentList.add(equipment);
+                }
             }
         }catch(Exception e){
             DialogUtil.showDialog(this,e.getMessage());
@@ -89,9 +93,30 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
     }
     private JSONArray getEquips() throws Exception{
         String url = HttpUtil.BASE_URL + "UserEquip";
-        return new JSONArray(HttpUtil.getRequest(url));
+        JSONArray all = new JSONArray(HttpUtil.getRequest(url));
+        JSONArray reserve = getreserEquips();
+        for(int i = 0; i < reserve.length(); i++){
+            for(int j = 0; j < all.length(); j++){
+                if(reserve.getJSONObject(i).getInt("equip_id")== all.getJSONObject(j).getInt("equip_id")){
+                    DialogUtil.showDialog(this, "已预约id"+reserve.getJSONObject(i).getInt("equip_id"));
+                    all.remove(j);
+                }
+            }
+
+        }
+        return all;
     }
 
+    private JSONArray getreserEquips() throws Exception{
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", valueOf(RefreshORM.get(this, "user_id")));
+        DialogUtil.showDialog(this, valueOf(RefreshORM.get(this, "user_id")));
+        /* type 1 means equipment */
+        map.put("type", "1");
+        String url = HttpUtil.BASE_URL + "ReserRequest";
+
+        return new JSONArray(HttpUtil.postRequest(url, map));
+    }
 
 
 

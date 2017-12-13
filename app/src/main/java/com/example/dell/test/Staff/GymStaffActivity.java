@@ -33,7 +33,7 @@ public class GymStaffActivity extends AppCompatActivity {
         TextView gym_address = (TextView) findViewById(R.id.textView_gym_staff_address);
         TextView gym_contact = (TextView) findViewById(R.id.textView_gym_staff_contact);
         try {
-            JSONArray gym_list = Cache.cacheGymlist(this);
+            JSONArray gym_list =getGymlist();
             Gym.setGym_id(gym_list.getJSONObject(position).getInt("gym_id"));
             gym_image.setImageBitmap(HttpUtil.getpic(gym_list.getJSONObject(position).getString("gym_picture")));
             gym_name.setText(gym_list.getJSONObject(position).getString("gym_name"));
@@ -45,6 +45,11 @@ public class GymStaffActivity extends AppCompatActivity {
         }
 
         /******************这里用position set GYMSTAFF界面  参考GYMSTUDENT********************/
+    }
+
+    private JSONArray getGymlist() throws Exception{
+        String url = HttpUtil.BASE_URL + "GymList";
+        return new JSONArray(HttpUtil.getRequest(url));
     }
 
     public void Edit(View view) {

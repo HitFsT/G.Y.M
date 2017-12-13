@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.dell.test.Game.Game;
 import com.example.dell.test.Game.GameAdapter;
 import com.example.dell.test.Game.GameReservationAdapter;
+import com.example.dell.test.Gym.Gym;
 import com.example.dell.test.Http.CompetitionORM;
 import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.EquipmentORM;
@@ -48,16 +49,28 @@ public class InqueryGameActivity extends AppCompatActivity {
     private void initGame() {
         JSONArray games = new JSONArray();
         try {
-            games = cacheGames();
+            games = getGames();
             for (int i = 0; i < games.length(); i++) {
-                Game game = new Game();
-                game.setName(games.getJSONObject(i).getString("competition_name"));
-                game.setGame_id(games.getJSONObject(i).getInt("competition_id"));
-                game.setUser_id(RefreshORM.get(this, "user_id"));
-                game.setStart(games.getJSONObject(i).getString("competition_start"));
-                game.setEnd(games.getJSONObject(i).getString("competition_end"));
-                game.setSelected(false);
-                gameList.add(game);
+                if(games.getJSONObject(i).getInt("competition_gym_id") == Gym.getGym_id()) {
+                    try{
+                        Game game = new Game();
+                        game.setName(games.getJSONObject(i).getString("competition_name"));
+                        DialogUtil.showDialog(this, "比赛名字"+game.getName());
+                        game.setGame_id(games.getJSONObject(i).getInt("competition_id"));
+                        DialogUtil.showDialog(this, "比赛id"+game.getGame_id());
+                        game.setUser_id(RefreshORM.get(this, "user_id"));
+                        DialogUtil.showDialog(this, "比赛用户id"+game.getUser_id());
+                        game.setStart(games.getJSONObject(i).getString("competition_start"));
+                        DialogUtil.showDialog(this, "比赛开始时间"+game.getStart());
+                        game.setEnd(games.getJSONObject(i).getString("competition_end"));
+                        DialogUtil.showDialog(this, "比赛结束时间"+game.getEnd());
+                        game.setSelected(false);
+                        gameList.add(game);
+                    }catch (Exception e){
+                        DialogUtil.showDialog(this, e.getMessage());
+                    }
+
+                }
             }
         } catch (Exception e) {
             DialogUtil.showDialog(this, e.getMessage());
@@ -86,7 +99,7 @@ public class InqueryGameActivity extends AppCompatActivity {
         return games;
     }
 
-    private JSONArray getGames() throws Exception {
+    private JSONArray getreserGames() throws Exception{
         Map<String, String> map = new HashMap<>();
         map.put("user_id", valueOf(RefreshORM.get(this, "user_id")));
         /* type 1 means equipment */
@@ -94,7 +107,31 @@ public class InqueryGameActivity extends AppCompatActivity {
         String url = HttpUtil.BASE_URL + "ReserRequest";
 
         return new JSONArray(HttpUtil.postRequest(url, map));
+    }
 
+
+
+    private JSONArray getGames() throws Exception{
+        String url = HttpUtil.BASE_URL + "UserCompet";
+        JSONArray all = new JSONArray(HttpUtil.getRequest(url));
+        JSONArray reserve = getreserGames();
+//        DialogUtil.showDialog(this, "已预约的比赛"+reserve.toString());
+        for(int i = 0; i < reserve.length() ; i++){
+            for(int j = 0; j < all.length(); j++){
+                try{
+                    if(reserve.getJSONObject(i).getInt("competition_id")== all.getJSONObject(j).getInt("competition_id")){
+//                    DialogUtil.showDialog(this, "已预约id"+reserve.getJSONObject(i).getInt("competition_id"));
+                        all.remove(j);
+                    }
+                }catch (Exception e){
+                    DialogUtil.showDialog(this, e.getMessage());
+                }
+
+            }
+        }
+//        DialogUtil.showDialog(this, "已预约比赛"+reserve.toString());
+//        DialogUtil.showDialog(this, "所有比赛"+all.toString());
+        return all;
     }
 }
 

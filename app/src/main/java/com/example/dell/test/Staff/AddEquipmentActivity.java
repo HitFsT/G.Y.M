@@ -89,10 +89,11 @@ public class AddEquipmentActivity extends AppCompatActivity {
         map.put("operation", "1");
         map.put("gym_id", valueOf(Gym.getGym_id()));
         map.put("name", equip_name);
+        DialogUtil.showDialog(this, "你要插入的设施名为："+equip_name);
         map.put("start", equip_start);
         map.put("end", equip_end);
         String url = HttpUtil.BASE_URL + "EditEquip";
-        return new JSONObject(HttpUtil.postRequest(url, map)).toString();
+        return HttpUtil.postRequest(url, map);
     }
 
 }

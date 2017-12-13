@@ -26,6 +26,8 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.dell.test.Http.Cache.getGames;
+
 public class StaffGameActivity extends AppCompatActivity {
 
     private List<Game> gameList = new ArrayList<>();
@@ -65,20 +67,28 @@ public class StaffGameActivity extends AppCompatActivity {
     }
 
     private void initGame() {
-        JSONArray games = Cache.cacheGames(this);
         try{
+            JSONArray games = Cache.getGames();
             for (int i = 0; i < games.length(); i++) {
-                if(Gym.getGym_id() == games.getJSONObject(i).getInt("competition_gym_id")){
-                    Game game = new Game();
-                    game.setName(games.getJSONObject(i).getString("game_name"));
-                    game.setGame_id(games.getJSONObject(i).getInt("game_id"));
-                    game.setUser_id(RefreshORM.get(this, "user_id"));
-                    DialogUtil.showDialog(this,"用户id"+game.getUser_id());
-                    DialogUtil.showDialog(this,"Equip_id"+game.getGame_id());
-                    game.setStart(games.getJSONObject(i).getString("game_start"));
-                    game.setEnd(games.getJSONObject(i).getString("game_end"));
-                    game.setSelected(false);
-                    gameList.add(game);
+                if(games.getJSONObject(i).getInt("competition_gym_id") == Gym.getGym_id()) {
+                    try{
+                        Game game = new Game();
+                        game.setName(games.getJSONObject(i).getString("competition_name"));
+                        DialogUtil.showDialog(this, "比赛名字"+game.getName());
+                        game.setGame_id(games.getJSONObject(i).getInt("competition_id"));
+                        DialogUtil.showDialog(this, "比赛id"+game.getGame_id());
+                        game.setUser_id(RefreshORM.get(this, "user_id"));
+                        DialogUtil.showDialog(this, "比赛用户id"+game.getUser_id());
+                        game.setStart(games.getJSONObject(i).getString("competition_start"));
+                        DialogUtil.showDialog(this, "比赛开始时间"+game.getStart());
+                        game.setEnd(games.getJSONObject(i).getString("competition_end"));
+                        DialogUtil.showDialog(this, "比赛结束时间"+game.getEnd());
+                        game.setSelected(false);
+                        gameList.add(game);
+                    }catch (Exception e){
+                        DialogUtil.showDialog(this, e.getMessage());
+                    }
+
                 }
             }
         }catch(Exception e){

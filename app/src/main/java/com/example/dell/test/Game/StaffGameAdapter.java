@@ -84,14 +84,14 @@ public class StaffGameAdapter extends RecyclerView.Adapter<StaffGameAdapter.View
                         DialogUtil.showDialog(parent.getContext(), valueOf(game_id));
                         try{
                             delete(gym_id, game_id);
-                            RefreshORM.settrue(parent.getContext(), "game");
+                            RefreshORM.settrue(parent.getContext(), "compet");
                         }catch (Exception e){
                             DialogUtil.showDialog(parent.getContext(), e.getMessage());
                         }
                         /*************
                          * *********删除*******
                          * **************/
-                        activity.finish();
+//                        activity.finish();
                         Intent intent = new Intent(parent.getContext(), StaffGameActivity.class);
                         parent.getContext().startActivity(intent);
                     }
@@ -121,13 +121,13 @@ public class StaffGameAdapter extends RecyclerView.Adapter<StaffGameAdapter.View
         return mGameList.size();
     }
 
-    private JSONObject delete(int gym_id, int game_id) throws Exception{
+    private String delete(int gym_id, int game_id) throws Exception{
         Map<String, String> map = new HashMap<>();
         map.put("gym_id", valueOf(gym_id));
-        map.put("equip_id", valueOf(game_id));
+        map.put("game_id", valueOf(game_id));
         /* 0 means delete */
         map.put("operation", valueOf(0));
         String url = HttpUtil.BASE_URL + "EditGame";
-        return new JSONObject(HttpUtil.postRequest(url, map));
+        return HttpUtil.postRequest(url, map);
     }
 }

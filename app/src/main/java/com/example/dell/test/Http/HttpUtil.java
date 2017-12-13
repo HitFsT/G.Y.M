@@ -12,6 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import java.io.InputStream;
@@ -51,7 +52,7 @@ public class HttpUtil {
                     for(String key: rawParams.keySet()){
                         params.add(new BasicNameValuePair(key, rawParams.get(key)));
                     }
-                    post.setEntity(new UrlEncodedFormEntity(params));
+                    post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
                     HttpResponse httpResponse;
                     httpResponse = httpClient.execute(post);
                     if(httpResponse.getStatusLine().getStatusCode()==200){
@@ -75,7 +76,7 @@ public class HttpUtil {
                         HttpResponse httpResponse;
                         httpResponse = httpClient.execute(get);
                         if(httpResponse.getStatusLine().getStatusCode()==200){
-                            String result = EntityUtils.toString(httpResponse.getEntity(),"ISO-8859-1");
+                            String result = EntityUtils.toString(httpResponse.getEntity());
                             return result;
                         }
                         return null;

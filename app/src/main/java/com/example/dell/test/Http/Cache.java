@@ -57,7 +57,7 @@ public class Cache {
         return games;
     }
 
-    private static JSONArray getGames() throws Exception{
+    public static JSONArray getGames() throws Exception{
         String url = HttpUtil.BASE_URL + "UserCompet";
         return new JSONArray(HttpUtil.getRequest(url));
     }

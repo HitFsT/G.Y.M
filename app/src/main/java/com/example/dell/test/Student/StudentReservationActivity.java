@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.dell.test.Equipment.Equipment;
 import com.example.dell.test.Equipment.EquipmentAdapter;
@@ -32,11 +35,37 @@ public class StudentReservationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reservation);
 
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_student_refresh);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setTitle("我的预约");
+//
+//        ImageView refresh = (ImageView) findViewById(R.id.imageView_refresh);
+//        refresh.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                EquipmentList = new ArrayList<Equipment>();
+//                initEquip();  //game数据
+//                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_student_reservation);
+//                LinearLayoutManager layoutManager = new LinearLayoutManager(StudentReservationActivity.this);
+//                recyclerView.setLayoutManager(layoutManager);
+//                EquipmentAdapter adapter = new EquipmentAdapter(EquipmentList);
+//                recyclerView.setAdapter(adapter);
+//                finish();
+//            }
+//        });
+
+
         initEquip();  //game数据
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_student_reservation);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         EquipmentAdapter adapter = new EquipmentAdapter(EquipmentList);
+        try{
+            DialogUtil.showDialog(this, EquipmentList.get(0).getName());
+        }catch(Exception e){
+
+        }
+
         recyclerView.setAdapter(adapter);
     }
 
@@ -48,7 +77,7 @@ public class StudentReservationActivity extends AppCompatActivity {
             DialogUtil.showDialog(this, equips.toString());
             for (int i = 0; i < equips.length(); i++){
                 Equipment equipment = new Equipment();
-                equipment.setName(equips.getJSONObject(i).getString("equip_name"));
+                equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
                 equipment.setName(equips.getJSONObject(i).getString("equip_name"));
                 equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
                 equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));

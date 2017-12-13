@@ -16,7 +16,11 @@ import com.example.dell.test.R;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.String.valueOf;
 
 public class StudentTimeActivity extends AppCompatActivity {
 
@@ -55,10 +59,15 @@ public class StudentTimeActivity extends AppCompatActivity {
 
     }
 
+    private JSONArray getGames() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", valueOf(RefreshORM.get(this, "user_id")));
+        /* type 1 means equipment */
+        map.put("type", "0");
+        String url = HttpUtil.BASE_URL + "ReserRequest";
 
-    private JSONArray getGames() throws Exception{
-        String url = HttpUtil.BASE_URL + "UserCompet";
-        return new JSONArray(HttpUtil.getRequest(url));
+        return new JSONArray(HttpUtil.postRequest(url, map));
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.dell.test.Game;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.HttpUtil;
 import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
@@ -53,13 +55,18 @@ public class GameReservationAdapter extends RecyclerView.Adapter<GameReservation
                 int position = holder.getAdapterPosition();
                 Game game = mGameList.get(position);
                 if (game.isSelected()) {
+                    delete(parent.getContext(),RefreshORM.get(parent.getContext(), "user_id"), game.getGame_id());
                     game.setSelected(false);
-                    update_id(game.getGame_id(), game.getUser_id());
                     RefreshORM.settrue(parent.getContext(), "competition");
                     Log.d("我的输出", String.format("sss%d",position));
                     holder.gameImage.setImageResource(R.drawable.ic_circle);
                 }
                 else {
+                    try{
+                        DialogUtil.showDialog(parent.getContext(), update_id(game.getGame_id(), game.getUser_id()));
+                    }catch (Exception e){
+                        DialogUtil.showDialog(parent.getContext(),e.getMessage());
+                    }
                     game.setSelected(true);
                     holder.gameImage.setImageResource(R.drawable.ic_check);
                     Log.d("我的输出", "select");
@@ -88,7 +95,7 @@ public class GameReservationAdapter extends RecyclerView.Adapter<GameReservation
         return mGameList.size();
     }
 
-    public void update_id(int game_id, int user_id){
+    public String update_id(int game_id, int user_id) throws Exception{
         Map<String, String> map = new HashMap<>();
         /* 1 means insert */
         map.put("operation", "1");
@@ -96,9 +103,26 @@ public class GameReservationAdapter extends RecyclerView.Adapter<GameReservation
         map.put("user_id", String.valueOf(user_id));
         map.put("type", "0");
         String url = HttpUtil.BASE_URL + "Reserve";
-        try{
-            HttpUtil.postRequest(url, map);
-        }catch (Exception e){}
 
+        return HttpUtil.postRequest(url, map);
+
+    }
+
+
+    public void delete(Context context, int user_id, int game_id) {
+        Map<String, String> map = new HashMap<>();
+        /* 0 means delete */
+        map.put("operation", "0");
+        map.put("item_id", String.valueOf(game_id));
+        map.put("user_id", String.valueOf(user_id));
+        map.put("type", "0");
+        String url = HttpUtil.BASE_URL + "Reserve";
+        try {
+            DialogUtil.showDialog(context, "game_id = " + String.valueOf(game_id));
+            DialogUtil.showDialog(context, "user_id = " + String.valueOf(user_id));
+            DialogUtil.showDialog(context, HttpUtil.postRequest(url, map));
+        } catch (Exception e) {
+            DialogUtil.showDialog(context, e.getMessage());
+        }
     }
 }

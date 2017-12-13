@@ -54,7 +54,7 @@ public class AddGameActivity extends AppCompatActivity {
                 }catch (Exception e){
                     DialogUtil.showDialog(AddGameActivity.this, e.getMessage());
                 }
-                finish();
+//                finish();
             }
         });
         dialog.show();
@@ -82,7 +82,7 @@ public class AddGameActivity extends AppCompatActivity {
         return false;
     }
 
-    private JSONObject add_game(String name, String start, String end) throws Exception{
+    private String add_game(String name, String start, String end) throws Exception{
         Map<String, String> map = new HashMap<>();
         /* 1 means add */
         map.put("operation", valueOf(1));
@@ -91,7 +91,7 @@ public class AddGameActivity extends AppCompatActivity {
         map.put("start", start);
         map.put("end", end);
         String url = HttpUtil.BASE_URL + "EditGame";
-        return new JSONObject(HttpUtil.postRequest(url, map));
+        return  HttpUtil.postRequest(url, map);
     }
 
 }

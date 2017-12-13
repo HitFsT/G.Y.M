@@ -126,13 +126,13 @@ public class StaffEquipmentAdapter extends RecyclerView.Adapter<StaffEquipmentAd
         return mEquipmentList.size();
     }
 
-    private JSONObject delete(int gym_id, int equip_id) throws Exception{
+    private String delete(int gym_id, int equip_id) throws Exception{
         Map<String, String> map = new HashMap<>();
         map.put("gym_id", valueOf(gym_id));
         map.put("equip_id", valueOf(equip_id));
         /* 0 means delete */
         map.put("operation", valueOf(0));
         String url = HttpUtil.BASE_URL + "EditEquip";
-        return new JSONObject(HttpUtil.postRequest(url, map));
+        return HttpUtil.postRequest(url, map);
     }
 }

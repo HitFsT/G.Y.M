@@ -1,5 +1,8 @@
 package com.example.dell.test.Equipment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by DELL on 2017/12/9.
  */
@@ -29,6 +32,8 @@ public class Equipment {
     private String start;
     private String end;
     private boolean selected;
+
+    public static List<Reserve> ReserveList;
 
     public String getName() {
         return name;

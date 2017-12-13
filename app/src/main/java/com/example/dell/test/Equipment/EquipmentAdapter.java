@@ -1,5 +1,7 @@
 package com.example.dell.test.Equipment;
 
+import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dell.test.Http.DialogUtil;
 import com.example.dell.test.Http.HttpUtil;
 import com.example.dell.test.Http.RefreshORM;
 import com.example.dell.test.R;
@@ -45,6 +48,7 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
 
     @Override
     public EquipmentAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType){
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_equipment, parent ,false);
         final EquipmentAdapter.ViewHolder holder = new EquipmentAdapter.ViewHolder(view);
@@ -55,7 +59,8 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
                 final Equipment equipment = mEquipmentList.get(position);
                 if (equipment.isSelected()) {
                     equipment.setSelected(false);
-                    delete(RefreshORM.get(parent.getContext(), "user_id"), equipment.getEquip_id());
+                    delete(parent.getContext(),RefreshORM.get(parent.getContext(), "user_id"), equipment.getEquip_id());
+                    DialogUtil.showDialog(parent.getContext(), "check");
                     RefreshORM.settrue(parent.getContext(),"equip");
                     Log.d("我的输出", String.format("sss%d",position));
                     holder.equipmentImage.setImageResource(R.drawable.ic_circle);
@@ -87,7 +92,7 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
         return mEquipmentList.size();
     }
 
-    public void delete(int equip_id, int user_id){
+    public void delete(Context context,  int user_id, int equip_id){
         Map<String, String> map = new HashMap<>();
         /* 0 means delete */
         map.put("operation", "0");
@@ -96,8 +101,12 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
         map.put("type", "1");
         String url = HttpUtil.BASE_URL + "Reserve";
         try{
-            HttpUtil.postRequest(url, map);
-        }catch (Exception e){}
+            DialogUtil.showDialog(context,  "equip_id = " +String.valueOf(equip_id));
+            DialogUtil.showDialog(context,  "user_id = " + String.valueOf(user_id));
+            DialogUtil.showDialog(context, HttpUtil.postRequest(url, map));
+        }catch (Exception e){
+            DialogUtil.showDialog(context, e.getMessage());
+        }
 
     }
 }

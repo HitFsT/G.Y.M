@@ -62,8 +62,8 @@ public class StaffEquipmentActivity extends AppCompatActivity {
     }
 
     private void initEquip() {
-        JSONArray equips = cacheEquip();
         try{
+            JSONArray equips = getEquips();
             for (int i = 0; i < equips.length(); i++) {
                 if(Gym.getGym_id() == equips.getJSONObject(i).getInt("equip_gym_id")){
                     Equipment equipment = new Equipment();
