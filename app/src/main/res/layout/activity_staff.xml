@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/gym_staff_toolbar"
+        layout="@layout/gym_staff_toolbar_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -44,7 +44,7 @@ public class GymORM {
 
         ContentValues values = gymToContentValues(gym);
         long gymId = database.insert(GymORM.TABLE_NAME, "null", values);
-        DialogUtil.showDialog(context, "Inserted new Post with ID: " + gymId);
+//        DialogUtil.showDialog(context, "Inserted new Post with ID: " + gymId);
 
     }
 

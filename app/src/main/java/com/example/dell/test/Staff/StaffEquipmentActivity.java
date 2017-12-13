@@ -70,8 +70,8 @@ public class StaffEquipmentActivity extends AppCompatActivity {
                     equipment.setName(equips.getJSONObject(i).getString("equip_name"));
                     equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
                     equipment.setId(RefreshORM.get(this, "user_id"));
-                    DialogUtil.showDialog(this,"用户id"+equipment.getId());
-                    DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
+//                    DialogUtil.showDialog(this,"用户id"+equipment.getId());
+//                    DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
                     equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
                     equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
                     equipment.setSelected(false);
@@ -96,7 +96,7 @@ public class StaffEquipmentActivity extends AppCompatActivity {
                     DialogUtil.showDialog(this, e.getMessage());
                 }
             }else{
-                DialogUtil.showDialog(this, "使用缓存");
+//                DialogUtil.showDialog(this, "使用缓存");
                 equips = EquipmentORM.getEquips(this);
             }
         }else{

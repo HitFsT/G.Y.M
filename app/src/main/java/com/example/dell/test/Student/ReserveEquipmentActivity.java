@@ -57,8 +57,8 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
                     equipment.setName(equips.getJSONObject(i).getString("equip_name"));
                     equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
                     equipment.setId(RefreshORM.get(this, "user_id"));
-                    DialogUtil.showDialog(this,"用户id"+equipment.getId());
-                    DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
+//                    DialogUtil.showDialog(this,"用户id"+equipment.getId());
+//                    DialogUtil.showDialog(this,"Equip_id"+equipment.getEquip_id());
                     equipment.setStart(equips.getJSONObject(i).getString("equip_start"));
                     equipment.setEnd(equips.getJSONObject(i).getString("equip_end"));
                     equipment.setSelected(false);
@@ -83,7 +83,7 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
                     DialogUtil.showDialog(this, e.getMessage());
                 }
             }else{
-                DialogUtil.showDialog(this, "使用缓存");
+//                DialogUtil.showDialog(this, "使用缓存");
                 equips = EquipmentORM.getEquips(this);
             }
         }else{
@@ -98,7 +98,7 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
         for(int i = 0; i < reserve.length(); i++){
             for(int j = 0; j < all.length(); j++){
                 if(reserve.getJSONObject(i).getInt("equip_id")== all.getJSONObject(j).getInt("equip_id")){
-                    DialogUtil.showDialog(this, "已预约id"+reserve.getJSONObject(i).getInt("equip_id"));
+//                    DialogUtil.showDialog(this, "已预约id"+reserve.getJSONObject(i).getInt("equip_id"));
                     all.remove(j);
                 }
             }
@@ -110,7 +110,7 @@ public class ReserveEquipmentActivity extends AppCompatActivity {
     private JSONArray getreserEquips() throws Exception{
         Map<String, String> map = new HashMap<>();
         map.put("user_id", valueOf(RefreshORM.get(this, "user_id")));
-        DialogUtil.showDialog(this, valueOf(RefreshORM.get(this, "user_id")));
+//        DialogUtil.showDialog(this, valueOf(RefreshORM.get(this, "user_id")));
         /* type 1 means equipment */
         map.put("type", "1");
         String url = HttpUtil.BASE_URL + "ReserRequest";

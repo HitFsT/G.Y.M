@@ -31,7 +31,7 @@ public class AddGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_game);
         Intent get_intent = getIntent();
         int position = get_intent.getIntExtra("position", 0);
-        DialogUtil.showDialog(this, valueOf(Gym.getGym_id()));
+//        DialogUtil.showDialog(this, valueOf(Gym.getGym_id()));
         game_name = (EditText) findViewById(R.id.editText_add_game_name);
         game_start = (EditText) findViewById(R.id.editText_add_game_start_time);
         game_end = (EditText) findViewById(R.id.editText_add_game_end_time);

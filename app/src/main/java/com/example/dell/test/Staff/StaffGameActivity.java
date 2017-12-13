@@ -74,15 +74,15 @@ public class StaffGameActivity extends AppCompatActivity {
                     try{
                         Game game = new Game();
                         game.setName(games.getJSONObject(i).getString("competition_name"));
-                        DialogUtil.showDialog(this, "比赛名字"+game.getName());
+//                        DialogUtil.showDialog(this, "比赛名字"+game.getName());
                         game.setGame_id(games.getJSONObject(i).getInt("competition_id"));
-                        DialogUtil.showDialog(this, "比赛id"+game.getGame_id());
+//                        DialogUtil.showDialog(this, "比赛id"+game.getGame_id());
                         game.setUser_id(RefreshORM.get(this, "user_id"));
-                        DialogUtil.showDialog(this, "比赛用户id"+game.getUser_id());
+//                        DialogUtil.showDialog(this, "比赛用户id"+game.getUser_id());
                         game.setStart(games.getJSONObject(i).getString("competition_start"));
-                        DialogUtil.showDialog(this, "比赛开始时间"+game.getStart());
+//                        DialogUtil.showDialog(this, "比赛开始时间"+game.getStart());
                         game.setEnd(games.getJSONObject(i).getString("competition_end"));
-                        DialogUtil.showDialog(this, "比赛结束时间"+game.getEnd());
+//                        DialogUtil.showDialog(this, "比赛结束时间"+game.getEnd());
                         game.setSelected(false);
                         gameList.add(game);
                     }catch (Exception e){
@@ -95,6 +95,11 @@ public class StaffGameActivity extends AppCompatActivity {
             DialogUtil.showDialog(this,e.getMessage());
         }
 
+
     }
+
+
+
+
 
 }

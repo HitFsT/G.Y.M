@@ -75,7 +75,7 @@ public class StaffEquipmentAdapter extends RecyclerView.Adapter<StaffEquipmentAd
                 final Equipment equipment = mEquipmentList.get(position);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(parent.getContext());
                 dialog.setTitle("删除信息");
-                dialog.setMessage("是否删除?" + "龙哥这里需要重要的逻辑");
+                dialog.setMessage("是否删除?");
                 dialog.setCancelable(false);
                 dialog.setPositiveButton("OK", new DialogInterface.
                         OnClickListener() {
@@ -84,9 +84,9 @@ public class StaffEquipmentAdapter extends RecyclerView.Adapter<StaffEquipmentAd
                          * *********删除*******
                          * **************/
                         int gym_id = Gym.getGym_id();
-                        DialogUtil.showDialog(parent.getContext(), valueOf(gym_id));
+//                        DialogUtil.showDialog(parent.getContext(), valueOf(gym_id));
                         int equip_id = equipment.getEquip_id();
-                        DialogUtil.showDialog(parent.getContext(), valueOf(equip_id));
+//                        DialogUtil.showDialog(parent.getContext(), valueOf(equip_id));
                         try{
                             delete(gym_id, equip_id);
                             RefreshORM.settrue(parent.getContext(), "equip");

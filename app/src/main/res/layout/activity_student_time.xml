@@ -6,6 +6,11 @@
     tools:context="com.example.dell.test.Student.StudentTimeActivity"
     android:orientation="vertical">
 
+    <include
+        layout="@layout/toolbar_student_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_student_time"
         android:layout_width="match_parent"

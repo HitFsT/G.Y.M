@@ -29,7 +29,7 @@ public class AddEquipmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_equipment);
-        DialogUtil.showDialog(this, valueOf(Gym.getGym_id()));
+//        DialogUtil.showDialog(this, valueOf(Gym.getGym_id()));
         name = (EditText) findViewById(R.id.editText_add_equipment_name);
         start = (EditText) findViewById(R.id.editText_add_equipment_start_time);
         end = (EditText) findViewById(R.id.editText_add_equipment_end_time);
@@ -50,7 +50,7 @@ public class AddEquipmentActivity extends AppCompatActivity {
 
                 try{
                     String status = add_equip(equip_name, equip_start, equip_end);
-                    DialogUtil.showDialog(AddEquipmentActivity.this, status);
+//                    DialogUtil.showDialog(AddEquipmentActivity.this, status);
                 }catch (Exception e){
                     DialogUtil.showDialog(AddEquipmentActivity.this, e.getMessage());
                 }

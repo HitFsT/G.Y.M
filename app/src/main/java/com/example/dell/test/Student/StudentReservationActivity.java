@@ -35,24 +35,23 @@ public class StudentReservationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reservation);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_student_refresh);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("我的预约");
-//
-//        ImageView refresh = (ImageView) findViewById(R.id.imageView_refresh);
-//        refresh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                EquipmentList = new ArrayList<Equipment>();
-//                initEquip();  //game数据
-//                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_student_reservation);
-//                LinearLayoutManager layoutManager = new LinearLayoutManager(StudentReservationActivity.this);
-//                recyclerView.setLayoutManager(layoutManager);
-//                EquipmentAdapter adapter = new EquipmentAdapter(EquipmentList);
-//                recyclerView.setAdapter(adapter);
-//                finish();
-//            }
-//        });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_student_refresh);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("我的预约");
+
+        ImageView refresh = (ImageView) findViewById(R.id.imageView_refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EquipmentList = new ArrayList<Equipment>();
+                initEquip();  //game数据
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_student_reservation);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(StudentReservationActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+                EquipmentAdapter adapter = new EquipmentAdapter(EquipmentList);
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
 
         initEquip();  //game数据
@@ -74,7 +73,7 @@ public class StudentReservationActivity extends AppCompatActivity {
 
         try {
             equips = getEquips();
-            DialogUtil.showDialog(this, equips.toString());
+//            DialogUtil.showDialog(this, equips.toString());
             for (int i = 0; i < equips.length(); i++){
                 Equipment equipment = new Equipment();
                 equipment.setEquip_id(equips.getJSONObject(i).getInt("equip_id"));
@@ -116,7 +115,7 @@ public class StudentReservationActivity extends AppCompatActivity {
     private JSONArray getEquips() throws Exception{
         Map<String, String> map = new HashMap<>();
         map.put("user_id", valueOf(RefreshORM.get(this, "user_id")));
-        DialogUtil.showDialog(this, valueOf(RefreshORM.get(this, "user_id")));
+//        DialogUtil.showDialog(this, valueOf(RefreshORM.get(this, "user_id")));
         /* type 1 means equipment */
         map.put("type", "1");
         String url = HttpUtil.BASE_URL + "ReserRequest";

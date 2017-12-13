@@ -60,7 +60,7 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
                 if (equipment.isSelected()) {
                     equipment.setSelected(false);
                     delete(parent.getContext(),RefreshORM.get(parent.getContext(), "user_id"), equipment.getEquip_id());
-                    DialogUtil.showDialog(parent.getContext(), "check");
+//                    DialogUtil.showDialog(parent.getContext(), "check");
                     RefreshORM.settrue(parent.getContext(),"equip");
                     Log.d("我的输出", String.format("sss%d",position));
                     holder.equipmentImage.setImageResource(R.drawable.ic_circle);
@@ -101,9 +101,10 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.View
         map.put("type", "1");
         String url = HttpUtil.BASE_URL + "Reserve";
         try{
-            DialogUtil.showDialog(context,  "equip_id = " +String.valueOf(equip_id));
-            DialogUtil.showDialog(context,  "user_id = " + String.valueOf(user_id));
-            DialogUtil.showDialog(context, HttpUtil.postRequest(url, map));
+            HttpUtil.postRequest(url, map);
+//            DialogUtil.showDialog(context,  "equip_id = " +String.valueOf(equip_id));
+//            DialogUtil.showDialog(context,  "user_id = " + String.valueOf(user_id));
+//            DialogUtil.showDialog(context, );
         }catch (Exception e){
             DialogUtil.showDialog(context, e.getMessage());
         }

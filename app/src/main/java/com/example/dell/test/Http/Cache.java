@@ -22,7 +22,7 @@ public class Cache {
                     DialogUtil.showDialog(context, e.getMessage());
                 }
             }else{
-                DialogUtil.showDialog(context, "使用缓存");
+//                DialogUtil.showDialog(context, "使用缓存");
                 gyms = GymORM.getGyms(context);
             }
         }else{
@@ -48,7 +48,7 @@ public class Cache {
                     DialogUtil.showDialog(context, e.getMessage());
                 }
             }else{
-                DialogUtil.showDialog(context, "使用缓存");
+//                DialogUtil.showDialog(context, "使用缓存");
                 games = CompetitionORM.getGames(context);
             }
         }else{

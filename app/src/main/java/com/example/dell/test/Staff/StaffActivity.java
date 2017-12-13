@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,21 +38,34 @@ public class StaffActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_staff);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_staff_refresh);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("我的体育馆");
+
+        gymList = new ArrayList<>();
         initGym();  //gym数据
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gym_staff_recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(StaffActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         GymAdapter adapter = new GymAdapter(gymList);
         adapter.setIndex(1);
         recyclerView.setAdapter(adapter);
 
-        ImageView imageview = findViewById(R.id.imageView_add);
+
+        ImageView imageview = findViewById(R.id.imageView_refresh);
         imageview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(StaffActivity.this, GymCreateActivity.class);
-                startActivity(intent);
+                gymList = new ArrayList<>();
+                initGym();  //gym数据
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gym_staff_recycler_view);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(StaffActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+                GymAdapter adapter = new GymAdapter(gymList);
+                adapter.setIndex(1);
+                recyclerView.setAdapter(adapter);
             }
         });
+
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
